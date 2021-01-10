@@ -1,0 +1,137 @@
+/*****
+ * Style for novagallery.org
+ * @author novafacile OÜ
+ * @copyright 2021 novafacile OÜ
+ *****/
+
+body {
+  background-color: #222222;
+  color: #ffffff;
+  font-weight: 300;
+  font-size: 1.1rem;
+}
+
+.navbar {
+  background-color: #000000;
+}
+
+/** header **/
+ header {
+  background-image: url("../img/home-tobias-keller-unsplash.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: #ffffff;
+ }
+
+ @media (max-width: 810px) { /* fix for iOS with cover and fixed background */
+  header {
+    background-attachment: initial !important;
+  }
+}
+
+ header .header-bg {
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 0, 0, 0.7);
+ }
+
+ header .logo {
+  width: 120px;
+  height: auto;
+  margin-top: 20vh;
+  margin-bottom: 2rem;
+ }
+
+ header h1.display-4 {
+  letter-spacing: 0.1rem;
+  font-weight: 500;
+  padding-top: 25vh;
+ }
+
+ header p.lead {
+  font-size: 1.4rem;
+ }
+
+header .icon {
+  color: #fdfdfd;
+}
+
+@media (max-width: 576px){
+  header p.lead {
+    font-size: 1.1rem;
+   }
+ }
+
+#scroll-to-lead {
+  cursor: pointer;
+  transition: 0.3s;
+  color: #999999;
+ }
+
+#scroll-to-lead:hover {
+  color: #ffffff;
+}
+
+/** content **/
+content ul li {
+  line-height: 2rem;
+}
+
+content h2 {
+  margin-bottom: 1.5rem;
+}
+
+/** content section lead **/
+content section.lead {
+  margin: 5rem auto;
+  max-width: 650px;
+  border: 1px solid #e0e0e0;
+  border-left: 0px;
+  border-right: 0px;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+content section.lead p {
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+}
+
+@media (max-width: 576px){
+  content section.lead {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 450px){
+  content section.lead {
+    font-size: 1.0rem;
+  }
+}
+
+
+
+/** content **/
+content section {
+  margin-top: 4rem;
+}
+
+
+
+
+/** footer **/
+footer {
+  margin-top: 7rem;
+  padding-top: 5rem;
+  padding-bottom: 3rem;
+  background-color: #000000;
+  color: #ddd;
+  font-size: 1rem;
+}
+
+footer strong {
+  font-weight: 600;
+}
