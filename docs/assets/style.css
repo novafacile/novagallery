@@ -11,8 +11,16 @@ body {
   font-size: 1.1rem;
 }
 
-.navbar {
-  background-color: #000000;
+a {
+  color: #fff;
+}
+
+a:hover {
+  color: #ccc;
+}
+
+code {
+  color: #0dcaf0;
 }
 
 /** header **/
@@ -75,23 +83,33 @@ header .icon {
 }
 
 /** content **/
-content ul li {
+content h2 {
+  margin-bottom: 1.5rem;
+}
+
+content h3 {
+  font-size: 1.4rem;
+}
+
+content ul, content ol {
+  margin-bottom: 2rem;
+}
+content ul li, content ol li {
   line-height: 2rem;
 }
 
-content h2 {
-  margin-bottom: 1.5rem;
+@media (max-width: 576px){
+  content ul, content ol {
+    padding-left: 1rem;
+  }
 }
 
 /** content section lead **/
 content section.lead {
   margin: 5rem auto;
-  max-width: 650px;
-  border: 1px solid #e0e0e0;
-  border-left: 0px;
-  border-right: 0px;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  line-height: 3rem;
 }
 
 content section.lead p {
@@ -113,14 +131,54 @@ content section.lead p {
 }
 
 
+/** content articles **/
+.nav-tabs .nav-link,
+.nav-tabs .nav-link.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover {
+  border: none;
+  border-radius: unset;
+  background: none;
+  margin-bottom: 1px;
+}
 
-/** content **/
-content section {
-  margin-top: 4rem;
+.nav-tabs .nav-link.active {
+  color: #ffffff;
+  background-color: #444;
 }
 
 
+content section {
+  margin-top: 5rem;
+}
 
+content article {
+  background: #444;
+  padding: 3rem;
+}
+
+@media (max-width: 768px){
+  content article {
+    padding: 3rem 1.5rem;
+  }
+}
+
+content article strong {
+  font-weight: 500;
+}
+
+
+.card {
+  border: none;
+  border-radius: none;
+  color: #000;
+  text-align: center;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.3);;
+}
 
 /** footer **/
 footer {
