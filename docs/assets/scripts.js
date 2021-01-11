@@ -82,18 +82,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
     scrollTo('#lead');
   });
 
-  window.addEventListener('popstate', (event) => {
-    let anchor = window.top.location.hash;
-    if(anchor){
-      if(!validateAnchor(anchor)){ // validate if regular anchor
-        return false; 
-      }
-      showTab(anchor);
+  // bind event listener on buttons
+  document.querySelectorAll('.navi-btn').forEach(function(el){
+    el.addEventListener('click', function(event){
+      event.preventDefault();
+      let target = el.getAttribute('href');
+      if(target){
+        if(!validateAnchor(target)){ // validate if regular anchor
+          return false; 
+        }
+      showTab(target);
       scrollTo('#content');
-    } else {
-      showTab('#home');
-    }
-    
+      } else {
+        showTab('#home');
+      }
+    });
   });
 
 })
