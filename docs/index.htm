@@ -30,9 +30,9 @@
         simple &amp; beautiful php photo gallery.
         </p>
         <p class="mt-5">
-          <a class="mt-5 me-4 btn btn-outline-light navi-btn" data-target="#features">Features</a>
-          <a class="mt-5 me-4 btn btn-outline-light navi-btn" data-target="#demo">Demo</a>
-          <a class="mt-5 btn btn-outline-light navi-btn" data-target="#download">Download</a>
+          <a href="#features" class="mt-5 me-4 btn btn-outline-light navi-btn">Features</a>
+          <a href="#demo" class="mt-5 me-4 btn btn-outline-light navi-btn">Demo</a>
+          <a href="#download" class="mt-5 btn btn-outline-light navi-btn">Download</a>
         </p>
         <div class="position-absolute bottom-0 start-50 translate-middle-x mb-5" id="scroll-to-lead">
           <p>More Info</p>
@@ -55,32 +55,33 @@
           </div>
         </div>
       </section>
+      
 
 
       <!-- content tabs -->
-      <section class="container-lg">
+      <section class="container-lg" id="content">
         
         <!-- tab nav -->
         <div class="row">
           <nav class="col-12 col-xl-10 offset-xl-1 col-xxl-8 offset-xxl-2">
-            <ul class="nav nav-tabs" id="contentTab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab">novaGallery</a>
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" id="home-tab" href="#home">novaGallery</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="features-tab" data-bs-toggle="tab" href="#features" role="tab">Features</a>
+                <a class="nav-link" id="features-tab" href="#features">Features</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="demo-tab" data-bs-toggle="tab" href="#demo" role="tab">Demo</a>
+                <a class="nav-link" id="demo-tab" href="#demo">Demo</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="download-tab" data-bs-toggle="tab" href="#download" role="tab">Download</a>
+                <a class="nav-link" id="download-tab" href="#download">Download</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="docs-tab" data-bs-toggle="tab" href="#docs" role="tab">Docs</a>
+                <a class="nav-link" id="docs-tab" href="#docs">Docs</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="license-tab" data-bs-toggle="tab" href="#license" role="tab">License & Terms</a>
+                <a class="nav-link" id="license-tab" href="#license">License & Terms</a>
               </li>
             </ul>
           </nav>
@@ -88,9 +89,9 @@
 
         <!-- tab content -->
         <div class="row">
-          <div class="tab-content  col-xl-10 offset-xl-1 col-xxl-8 offset-xxl-2" id="contentTabContent">
+          <div class="tab-content col-xl-10 offset-xl-1 col-xxl-8 offset-xxl-2">
             <!-- home -->
-            <article class="tab-pane fade show active text-center" id="home" role="tabpanel">
+            <article class="tab-pane fade show active text-center" id="home-content">
               <h2>Simple & Lightweight</h2>
               <p>Simply upload images to your web space and you're done.<br>
               No database, administration or anything else required.</p>
@@ -112,7 +113,7 @@
             </article>
 
             <!-- features -->
-            <article class="tab-pane fade" id="features" role="tabpanel">
+            <article class="tab-pane fade" id="features-content">
               <h2>Features</h2>
               <ul class="text-start">
                 <li><strong>Albums:</strong> Directories are rendered as albums</li>
@@ -129,7 +130,7 @@
             </article>
             
             <!-- demo -->
-            <article class="tab-pane fade" id="demo" role="tabpanel">
+            <article class="tab-pane fade" id="demo-content">
               <h2>Demo</h2>
               <p>
                 Check out our demo gallery: 
@@ -139,7 +140,7 @@
             </article>
             
             <!-- download -->
-            <article class="tab-pane fade" id="download" role="tabpanel">
+            <article class="tab-pane fade" id="download-content">
               <h2>Download</h2>
               <div class="row row-cols-1 row-cols-md-3 g-4">
 
@@ -215,14 +216,14 @@
               </div>
               <p class="mt-4 text-muted text-center">
                 <small>
-                  By downloading and purchasing you accept our <a href="#license" class="navi-btn text-muted" data-target="#license">license &amp; terms</a>.<br>
+                  By downloading and purchasing you accept our <a href="#license" class="navi-btn text-muted">license &amp; terms</a>.<br>
                   The Sale is issued by <a href="https://www.paddle.com" target="_blank" class="text-muted">Paddle.com</a>.
                 </small>
               </p>
             </article>
             
             <!-- docs -->
-            <article class="tab-pane fade" id="docs" role="tabpanel">
+            <article class="tab-pane fade" id="docs-content">
               <h2>Docs</h2>
               <h3>Requirements</h3>
               <ul>
@@ -263,7 +264,7 @@
             </article>
 
             <!-- license -->
-            <article class="tab-pane fade" id="license" role="tabpanel">
+            <article class="tab-pane fade" id="license-content">
               <h2>License</h2>
               <p>novaGallery is released under novafacile Software License.</p>
               <ol>
@@ -276,7 +277,6 @@
                   <li>You may not sell, redistribute or offer for download novaGallery in any form or in any medium, whether original or modified or for profit or not.</li>
                   <li>You agree not to use the product on illegal sites, or on pages which contain illegal material.</li>
                   <li>You may not use the product at all in jurisdictions where this agreement is itself illegal, or where you are not empowered to enter into such an agreement.</li>
-                  <li>The software is provided "as is" and novafacile OÜ disclaims all warranties with regard to this software including all implied warranties of merchantability and fitness. In no event shall novafacile OÜ be liable for any special, direct, indirect, or consequential damages or any damages whatsoever resulting from loss of use, data or profits, whether in an action of contract, negligence or other tortious action, arising out of or in connection with the use or performance of this software.</li>
               </ol>
               
               <h2 class="mt-5">Terms</h2>
@@ -295,8 +295,9 @@
                 <li>Major updates</li>
               </ul>
               <h3>Refund Policy</h3>
-              <p>A refund is usually not possible, since it is a digital product and functionality and features can be tested with the free version.</p>
-              
+              <p>Because our products are available as fully functional downloads and online demo, our clients are able to test and try the products before buying them. For this reason, we offer no refunds as a matter of policy. However, at our option and discretion, exceptions can be made under special circumstances.</p>
+              <h3>Limitation of Liability</h3>
+              <li>The software is provided "as is" and novafacile OÜ disclaims all warranties with regard to this software including all implied warranties of merchantability and fitness. In no event shall novafacile OÜ be liable for any special, direct, indirect, or consequential damages or any damages whatsoever resulting from loss of use, data or profits, whether in an action of contract, negligence or other tortious action, arising out of or in connection with the use or performance of this software.</li>
               <h2 class="mt-5">Resources</h2>
               <p>We are very thankful for the wonderful packages, without which the novaGallery would never work so well:</p>
               <ul>
@@ -319,9 +320,9 @@
       <section class="container text-center">        
         <div class="row">
           <div class="col-12">
-            <a class="btn btn-lg btn-outline-info me-3 mb-4 navi-btn" data-target="#download">novaGallery Download</a><br>
-            <a class="btn btn-outline-light me-3 navi-btn" data-target="#demo">Demo</a>
-            <a class="btn btn-outline-light me-3 navi-btn" data-target="#docs">Docs</a>
+            <a class="btn btn-lg btn-outline-info me-3 mb-4 navi-btn" href="#download">novaGallery Download</a><br>
+            <a class="btn btn-outline-light me-3 navi-btn" href="#demo">Demo</a>
+            <a class="btn btn-outline-light me-3 navi-btn" href="#docs">Docs</a>
           </div>
         </div>
       </section>
@@ -356,8 +357,7 @@
       </section>
     </footer>
 
-    <script src="assets/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="assets/scripts.js" type="text/javascript" charset="utf-8"></script>
-
+  
   </body>
 </html>

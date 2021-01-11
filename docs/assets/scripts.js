@@ -20,13 +20,10 @@ function showTab(tabname) {
 
   // add active state to element
   let active_tab = document.querySelector(tabname + '-tab');
-  let active_content = document.querySelector(tabname);
+  let active_content = document.querySelector(tabname + '-content');
   active_tab.classList.add('active');
   active_content.classList.add('active');
   active_content.classList.add('show');
-
-  // scroll to content
-  scrollTo("#contentTab");
 }
 
 /*** scroll to element by id ***/
@@ -43,23 +40,31 @@ function scrollTo(id){
 document.addEventListener("DOMContentLoaded", (event) => {
 
   // act on anchor in url
-  var anchor = window.top.location.hash;
-  if(anchor){
-    showTab(anchor);
+  try {
+    let anchor = window.top.location.hash;
+    let firstEl = document.querySelector(anchor + '-content');
+    if(firstEl){
+      showTab(anchor);
+      scrollTo('#content');
+    }  
+  } catch (e){
+    // ignore
   }
-
+  
   // more info link
   document.querySelector("#scroll-to-lead").addEventListener("click", function(){
     scrollTo('#lead');
   });
 
-  // bind event listener on buttons
-  document.querySelectorAll('.navi-btn').forEach(function(el){
-    el.addEventListener('click', function(){
-      let target = el.getAttribute('data-target');
+  window.addEventListener('popstate', (event) => {
+    let target = window.top.location.hash;
+    if(target){
       showTab(target);
-    });
+      scrollTo('#content');
+    } else {
+      showTab('#home');
+    }
+    
   });
-
 
 })
