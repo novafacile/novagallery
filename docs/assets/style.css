@@ -131,7 +131,11 @@ content section.lead p {
 }
 
 
-/** content articles **/
+/** nav tabs **/
+.nav-tabs {
+  margin-top: 1rem;
+}
+
 .nav-tabs .nav-link,
 .nav-tabs .nav-link.nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active,
@@ -148,7 +152,7 @@ content section.lead p {
   background-color: #444;
 }
 
-
+/** content articles **/
 content section {
   margin-top: 5rem;
 }
