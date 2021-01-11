@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   
   // more info link
   document.querySelector("#scroll-to-lead").addEventListener("click", function(){
+    showTab('#home');
     scrollTo('#lead');
   });
 
