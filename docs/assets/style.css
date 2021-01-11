@@ -180,6 +180,12 @@ content article strong {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.3);;
 }
 
+.card .price {
+  font-weight: 600;
+  color: #3C73CD;
+  font-size: 1.8rem;
+}
+
 /** footer **/
 footer {
   margin-top: 7rem;
