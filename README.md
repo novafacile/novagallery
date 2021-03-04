@@ -9,7 +9,7 @@ Product Page: [novaGallery.org](https://novagallery.org)
 ### Overview
 
 * **Albums**: Directories are rendered as albums
-* **Sub-Albums**: 
+* **Sub-Albums**: Can be used for more detailed organisation
 * **Preview images** for albums: Automatically generate an album preview image
 * **Photo overview**: All photos are displayed sorted by creation date or name
 * **Lightbox**: View your photos in large format, hiding everything that is distracting
