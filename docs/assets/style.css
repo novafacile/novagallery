@@ -190,6 +190,15 @@ content article strong {
   font-size: 1.8rem;
 }
 
+.card .btn-primary {
+  background-color: #3C73CD;
+}
+
+.card .btn-primary:hover {
+  background-color: #4C3BCC;
+}
+
+
 /** footer **/
 footer {
   margin-top: 7rem;

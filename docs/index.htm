@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>novaGallery - Photo Gallery for beautiful Photos</title>
-    <meta name=description content="Simple and easy photo gallery script in php without database, to manage and present photos in a beautiful way.">
+    <meta name="description" content="Beautiful php photo gallery with the focus on your images, trimmed for ease of use and low demands on web space. Simple flat file configuration - No database required.">
     <meta name="author" content="novafacile OÜ">
     <meta name="robots" content="index, follow">
     <link rel="shortcut icon" type="image/x-icon" href="img/novagallery-icon.png">
@@ -95,7 +95,7 @@
             <article class="tab-pane fade show active text-center" id="home-content">
               <h2>Simple & Lightweight</h2>
               <p>Simply upload images to your web space and you're done.<br>
-              No database, administration or anything else required.</p>
+              No database, administration or anything else is required.</p>
               <div class="row">
                 <div class="col-12 col-md-4">
                   <img src="img/novagallery-home.jpg" class="w-100 mt-5"><br>
@@ -116,17 +116,31 @@
             <!-- features -->
             <article class="tab-pane fade" id="features-content">
               <h2>Features</h2>
+              <h3>Albums & Images</h3>
               <ul class="text-start">
-                <li><strong>Albums:</strong> Directories are rendered as albums</li>
-                <li><strong>Preview images for albums:</strong> Automatically generate an album preview image</li>
-                <li><strong>Photo overview:</strong> All photos are displayed sorted by creation date</li>
-                <li><strong>Lightbox:</strong> View your photos in large format, hiding everything that is distracting</li>
-                <li><strong>Photo slideshow:</strong> All photos in an album, can be displayed and presented via click (or keyboard) in the lightbox view</li>
-                <li><strong>Photo Upload:</strong> Simply upload the photos into the gallery folder (e.g. via FTP) and the photos are already online</li>
-                <li><strong>Thumbnails:</strong> Automatic generation of thumbnails</li>
-                <li><strong>File compression:</strong> Photos with high file size, are automatically compressed with very little loss.</li>
-                <li><strong>Custom Themes:</strong> With just a little knowledge of CSS and HTML, the look can be customized.</li>
-                <li><strong>JPEG image format:</strong> Currently JPG images are supported (.jpg, .jpeg, .JPG, .JPEG).</li>
+                <li>Albums: Directories are rendered as albums</li>
+                <li>Sub-Albums (just sub directories) can be used for more detailed organisation</li>
+                <li>Photos and albums can be automatically ordered by capture date (based on EXIF data).</li>
+                <li>Photo lightbox for fullsize view</li>
+                <li>Photo slideshow: All photos in an album, can be displayed and presented in the lightbox view</li>
+              </ul>
+              <h3>Customizable</h3>
+              <ul>
+                <li>Custom Themes: With just a little knowledge of CSS and HTML, the theme can be customized.</li>
+                <li>Multi Language: English, German, Spanish, French, Netherlands. More languages can be added.</li>
+                <li>Private mode - protect you gallery with a password.</li>
+                <li>Extended configuration options available.</li>
+              </ul>
+              <h3>Easy To Use</h3>
+              <ul>
+                <li>Simply upload the photos into the gallery folder (e.g. via FTP) and the photos are already online</li>
+                <li>Automatic thumbnails generation</li>
+                <li>Generates automatically an album preview image</li>
+              </ul>
+              <h3>Performance</h3>
+              <ul>
+                <li>Smart and configurable cache mechanism.</li>
+                <li>Photos with high file size, are automatically compressed with very little loss.</li>
               </ul>
             </article>
             
@@ -143,28 +157,26 @@
             <!-- download -->
             <article class="tab-pane fade" id="download-content">
               <h2>Download</h2>
-              <p>Choose your lincense.</p>
-              <div class="row row-cols-1 row-cols-md-3 g-4">
+              <div class="row row-cols-1 row-cols-sm-2 g-4">
 
                 <!-- free -->
                 <div class="col">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h3 class="card-title pt-3">Free</h3>
+                      <h3 class="card-title pt-3">Free Version</h3>
                       <div class="price">0,00 €</div>
                       <small class="text-muted">- free for ever -</small>
                       <hr>
                       <div class="card-text mt-4 text-start">
                         <ul>
-                          <li>1 Website</li>
-                          <li>max. 3 Albums</li>
-                          <li>max. 10 Images</li>
-                          <li>Copyright required</li>
+                          <li>Copyright Notice Required</li>
+                          <li>All Features Included</li>
+                          <li>Open Source</li>
                         </ul>
                       </div>
                     </div>
                     <div class="card-footer text-center py-4">
-                      <a href="#!" class="paddle_button btn btn-secondary" data-product="628910" data-theme="none" data-init="true">Free Download</a>
+                      <a href="https://github.com/novafacile/novagallery/raw/main/releases/novagallery-latest.zip" class="btn btn-secondary">Free Download</a>
                     </div>
                   </div>
                 </div>
@@ -173,48 +185,31 @@
                 <div class="col">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h3 class="card-title pt-3">Single Page</h3>
-                      <div class="price">25,00 €</div>
+                      <h3 class="card-title pt-3">Without Copyright Notice</h3>
+                      <div class="price">15,00 €</div>
                       <small class="text-muted">- one time fee -</small>
                       <hr>
                       <div class="card-text mt-4 text-start">
                         <ul>
-                          <li>1 Website</li>
-                          <li>Unlimited Albums</li>
-                          <li>Unlimited Images</li>
-                          <li>No Copyright required</li>
+                          <li>Without Copyright Notice</li>
+                          <li>All Features Included</li>
+                          <li>Open Source</li>
+                          <li>License for 1 Website</li>
+                          <li>Lifetime License</li>
                         </ul>
                       </div>
                     </div>
                     <div class="card-footer text-center py-4">
-                      <a href="#!" class="paddle_button btn btn-lg btn-success" data-product="628585" data-theme="none" data-init="true">Buy License</a>
+                      <a href="#!" class="paddle_button btn btn-primary" data-product="628585" data-theme="none" data-init="true">Buy License</a>
                     </div>
                   </div>
                 </div>
 
-                <!-- network -->
-                <div class="col">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h3 class="card-title pt-3">Network License</h3>
-                      <div class="price">250,00 €</div>
-                      <small class="text-muted">- one time fee -</small>
-                      <hr>
-                      <div class="card-text mt-4 text-start">
-                        <ul>
-                          <li>Unlimited Websites</li>
-                          <li>Unlimited Albums</li>
-                          <li>Unlimited Images</li>
-                          <li>No Copyright required</li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="card-footer text-center py-4">
-                      <a href="#!" class="paddle_button btn btn-success" data-product="628590" data-theme="none" data-init="true">Buy License</a>
-                    </div>
-                  </div> 
-                </div>
+              </div>
 
+              <div class="col-12 mt-5 px-3">
+                <h4>Network License</h4>
+                If you want to run novaGallery on multiple websites without a copyright notice, you can purchase a Network License for only 90,00 €. This allows you to run novaGallery on an unlimited number of sites without copyright notice. This is especially suitable for agencies. <a href="#!" class="paddle_button" data-product="628590" data-theme="none" data-init="true">Buy Network Licence</a>.
               </div>
               <p class="mt-4 text-muted text-center">
                 <small>
@@ -229,15 +224,18 @@
               <h2>Docs</h2>
               <h3>Requirements</h3>
               <ul>
-                <li>Web space with PHP5.6 or PHP7.x</li>
+                <li>Web space with PHP 7.x and latest GD Extension and Exif-Support.</li>
                 <li>Apache, nginx or other web server</li>
-                <li>Currently supported file format for photos: jpg/jpeg</li>
+                <li>Supported file types: JPEG & PNG</li>
+                <li>No database required</li>
               </ul>
 
               <h3>Installation</h3>
               <ul>
+                <li>Unzip files</li>
                 <li>Upload files on Webspace</li>
-                <li>Change name and description in <code>config/site.php</code></li>
+                <li>Copy <code>nova-config/site.example.php</code> to <code>nova-config/site.php</code></li>
+                <li>Change settings in <code>nova-config/site.php</code></li>
                 <li>Create folders in <code>galleries</code> (used as albums)</li>
                 <li>Upload your images to the albums</li>
                 <li>Enjoy your new beautiful photo gallery</li>
@@ -247,15 +245,19 @@
               <ul>
                 <li>
                   <strong>Add Photos:</strong>
-                  Just upload the new photo to the server into the correct album (e.g via FTP)
+                  Just upload the new photo to the server into the correct album (e.g via FTP).
                 </li>
                 <li>
                   <strong>Delete a Photos:</strong>
-                  Just delete the photo at the server
+                  Just delete the photo at the server. To save web space it's recommended to delete the cached files also.
                 </li>
                 <li>
-                  <strong>Delete a Album:</strong>
-                  Just delete the whole album (directory) at the server
+                  <strong>Delete an Album:</strong>
+                  Just delete the whole album (directory) at the server.
+                </li>
+                <li>
+                  <strong>Reset Cache:</strong>
+                  Every album has a cache directory. Just delete this directory.
                 </li>
               </ul>
 
@@ -263,49 +265,60 @@
               <ul>
                 <li>The first time you open an album, the thumbnails are generated. This may take a some time. With every further request (across visitors) the generated thumbnails are used and the page speed is faster.</li>
               </ul>
+
+              <h3>Developer Information</h3>
+              <ul>
+                <li>For more Information checkout <a href="https://github.com/novafacile/novagallery">novaGallery Repository on Github</a>.</li>
+              </ul>
             </article>
 
             <!-- license -->
             <article class="tab-pane fade" id="license-content">
-              <h2>License</h2>
-              <p>novaGallery is released under novafacile Software License.</p>
-              <ol>
-                  <li>If you download, buy or use novaGallery, you accept this license</li>
-                  <li>Every version of novaGallery can be used for private, commercial or non-profit websites.</li>
-                  <li>For the "Free Version" it is not allowed to remove the copyright. This must be visible on the website for the visitors.</li>
-                  <li>For a purchased version, the copyright may be removed.</li>
-                  <li>The term "website" means a single website with a single domain. Every instance with an other subdomain is an separate website and requires an own licence (except the "www"-subdomain). The website could be your own or a website you build/maintain for someone else.</li>
-                  <li>With "Network Licens" you can host unlimited instances of novaGallery with no limit of domains.</li>
-                  <li>You may not sell, redistribute or offer for download novaGallery in any form or in any medium, whether original or modified or for profit or not.</li>
-                  <li>You agree not to use the product on illegal sites, or on pages which contain illegal material.</li>
-                  <li>You may not use the product at all in jurisdictions where this agreement is itself illegal, or where you are not empowered to enter into such an agreement.</li>
-              </ol>
+              <h2>Summary</h2>
+              <p>
+                novaGallery Free Edition is released under <a href="https://github.com/novafacile/novagallery/blob/main/LICENSE">GNU Affero General Public License v3.0</a>. You can use novaGallery for almost any purpose (eg. commercial & private use, code modifications) under the following conditions:
+              </p>
+              <ul>
+                <li>You are not allowed to remove the license and copyright notice. This must be visible on the website for the visitors. This also applies to a modified version.</li>
+                <li>If you publish the same or a modificated version, you are only allowed to publish it under the same licences (AGPL-3.0 License).</li>
+                <li>It is not allowed to sell novaGallery regardless of whether it is the original or a modified version. Allowed are paid services such as setting up, managing, customizing or hosting novaGallery.</li>
+                <li>You agree not to use the novaGallery on illegal sites, or on pages which contain illegal material.</li>
+                <li>You may not use the novaGallery at all in jurisdictions where this agreement is itself illegal, or where you are not empowered to enter into such an agreement.</li>
+              </ul>
+
+              <h2>Paid Version / Paid License</h2>
+              <p>With the purchase of a license you get the following rights:</p>
+              <ul>
+                <li>The mention of the copyright and any other mention of novaGallery may be removed.</li>
+                <li>The source code can be modificated and does not have to be published.</li>
+                <li>A paid license can be used on <strong>one</strong> website. The term "website" means a single website with a single domain. Every instance with an other subdomain is an separate website and requires an own licence (except the "www"-subdomain). The website could be your own or a website you build/maintain for someone else.</li>
+              </ul>
+              <p>With the following limitation:</p>
+              <ul>
+                <li>You may not sell, redistribute or offer for download a paid novaGallery in any form or in any medium, whether original or modified or for profit or not.</li>
+              </ul>
               
               <h2 class="mt-5">Terms</h2>
               <h3>Scope of Services Includes</h3>
               <ul>
                 <li>Provision of a PHP script for displaying photos in an online gallery.</li>
-                <li>Updates of the purchased major version.</li>
-                <li>Updates of the purchased major version.</li>
-                <li>Support via e-mail (only for purchased versions)</li>
               </ul>
               <h3>Scope of Services Does Not Include</h3>
               <ul>
                 <li>Hosting or setup of the PHP script (can be offered for additional fees).</li>
                 <li>Checking if webspace meets the requirements (can be tried for free with free version).</li>
                 <li>Individual adjustments to the script (can be offered for additional fees).</li>
-                <li>Major updates</li>
               </ul>
               <h3>Refund Policy</h3>
-              <p>Because our products are available as fully functional downloads and online demo, our clients are able to test and try the products before buying them. For this reason, we offer no refunds as a matter of policy. However, at our option and discretion, exceptions can be made under special circumstances.</p>
+              <p>Because novaGallery is available as fully functional download and online demo, our clients are able to test and try the products before buying them. For this reason, we offer no refunds as a matter of policy. However, at our option and discretion, exceptions can be made under special circumstances.</p>
               <h3>Limitation of Liability</h3>
-              <li>The software is provided "as is" and novafacile OÜ disclaims all warranties with regard to this software including all implied warranties of merchantability and fitness. In no event shall novafacile OÜ be liable for any special, direct, indirect, or consequential damages or any damages whatsoever resulting from loss of use, data or profits, whether in an action of contract, negligence or other tortious action, arising out of or in connection with the use or performance of this software.</li>
+              The software is provided "as is" and novafacile OÜ disclaims all warranties with regard to this software including all implied warranties of merchantability and fitness. In no event shall novafacile OÜ be liable for any special, direct, indirect, or consequential damages or any damages whatsoever resulting from loss of use, data or profits, whether in an action of contract, negligence or other tortious action, arising out of or in connection with the use or performance of this software.
               <h2 class="mt-5">Resources</h2>
               <p>We are very thankful for the wonderful packages, without which the novaGallery would never work so well:</p>
               <ul>
                 <li><a href="https://github.com/joseluisq/gimage" target="_blank">GImage by Jose Quintana</a></li>
                 <li><a href="https://simplelightbox.com" target="_blank">SimpleLightbox by André Rinas</a></li>
-                <li><a href="https://github.com/steampixel/simplePHPRouter" target="_blank">simplePHPRouter by steampixel</a></li>
+                <li><a href="https://github.com/steampixel/simplePHPRouter" target="_blank">simplePHPRouter by SteamPixel</a></li>
                 <li><a href="https://github.com/twbs" target="_blank">Bootstrap Team</a></li>
                 <li><a href="https://unsplash.com" target="_blank">Unsplash.com</a></li>
               </ul>
