@@ -109,4 +109,4 @@ We are very grateful to the creators of the following great packages that we use
 
 * All rights reserved by [novafacile OÜ](https://novafacile.com)
 * License: GNU Affero General Public License (A-GPL 3.0)
-* To remove all public copyright & "powered by" mentions, you can purchase a license on [novagallery.org](https://novagallery.org).
+* To remove all public copyright & "powered by" mentions, you can purchase a life time license on [novagallery.org](https://novagallery.org) for only 15,00 €.
