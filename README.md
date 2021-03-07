@@ -1,6 +1,6 @@
 # novaGallery
 
-novaGallery is a beautiful php photo gallery with the focus on your images, trimmed for ease of use and low demands on web space. You just need a webserver with PHP 7.X support. No database is required. Simple to use, easy customizable and beautiful. 
+novaGallery is a beautiful php image gallery with the focus on your images, trimmed for ease of use and low demands on web space. You just need a webserver with PHP 7.X support. No database is required. Simple to use, easy customizable and beautiful. 
 
 Product Page: [novaGallery.org](https://novagallery.org)
 
