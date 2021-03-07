@@ -2,7 +2,7 @@
 
 novaGallery is a beautiful php image gallery with the focus on your images, trimmed for ease of use and low demands on web space. You just need a webserver with PHP 7.X support. No database is required. Simple to use, easy customizable and beautiful. 
 
-Product Page: [novaGallery.org](https://novagallery.org)
+**Official Product Page**: [novaGallery.org](https://novagallery.org)
 
 ## Features
 
@@ -66,6 +66,8 @@ Product Page: [novaGallery.org](https://novagallery.org)
 
 ### Themes
 
+* Two basic themes are included: novagallery (default, dark) and novagallery-light
+* To change the theme, just change the theme name in `config/site.php`
 * Creating a new template is quite simple and works with basic PHP without any extra template engine.
 * To create a new template, the basic template (based on Bootstrap 4) can be duplicated, customized and activated in the settings.
 
@@ -79,7 +81,7 @@ Product Page: [novaGallery.org](https://novagallery.org)
 ### Private Mode
 * In `nova-config/site.php` you can set a PHP password hash
 * The password hash has to be created with the standard PHP function `password_hash()`
-* If you can't generate a password hash by your own, you can use our password hash generatore: [Password Hash Generator](https://tools.nova.ms/password-hash-generator)
+* If you can't generate a password hash by your own, you can use our password hash generator: [Password Hash Generator](https://tools.nova.ms/password-hash-generator)
 
 ## Nice to Know
 
@@ -89,7 +91,7 @@ Product Page: [novaGallery.org](https://novagallery.org)
 
 ## Support
 
-* For support just open a issue ticket: [novaGallery Support](https://github.com/novafacile/novagallery/issues)
+* For support just open a ticket: [novaGallery Support](https://github.com/novafacile/novagallery/issues)
 
 ## Contribution
 
