@@ -42,7 +42,7 @@ novaGallery is a beautiful php image gallery with the focus on your images, trim
 
 ### Installation
 
-* Download latest version: [Download novaGallery (latest version)](https://github.com/novafacile/novagallery/raw/main/releases/novagallery-latest.zip)
+* Download latest version: [Download novaGallery (latest version)](https://download.novafacile.com/novagallery/novagallery-free.zip)
 * Unzip files
 * Upload files to your webspace
 * Copy `nova-config/site.example.php` to `nova-config/site.php`
