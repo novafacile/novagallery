@@ -11,7 +11,7 @@
       <div class="container">
         <!-- albums -->
         <?php if($gallery->hasAlbums()): ?>
-        <div class="row px-3 mt-4 mb-5">
+        <div class="row px-2 mt-4">
           <?php foreach($gallery->albums($order) as $element => $modDate): 
                 $elementPath = $album ? $album.'/'.$element : $element;
           ?>
@@ -27,7 +27,7 @@
 
         <!-- images -->
         <?php if($gallery->hasImages()): ?>
-        <div class="row gallery px-2">
+        <div class="row gallery px-2 mt-4">
           <?php foreach($gallery->images($order) as $element => $modDate): ?>
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5 element">
               <a href="<?php echo Image::url($album, $element, Site::config('imageSizeBig')); ?>">
