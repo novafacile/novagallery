@@ -15,9 +15,6 @@ $path = dirname(__FILE__);
 $path = substr($path, 0, -10);
 define('ROOT_DIR', $path);
 
-// Load config
-require ROOT_DIR.'/nova-config/config.php';
-
 // Load Vendors in lib
 spl_autoload_register(function($class){
   $class = str_replace('\\', '/', $class);
@@ -35,10 +32,20 @@ require 'core/Site.php';
 
 Site::initialize();
 
+// define constants
+$imagesDirName = Site::config('imagesDirName');
+if(is_null($imagesDirName)){
+  $imagesDirName = 'galleries';
+}
+
+define('BASE_PATH', Site::basePath());
+
+define('IMAGES_DIR', ROOT_DIR.'/'.$imagesDirName);
+define('IMAGES_URL', BASE_PATH.'/'.$imagesDirName);
+define('IMAGES_QUALITY', Site::config('imageQuality'));
+
 define('THEME_DIR', 'nova-themes/'.Site::theme());
 define('THEME_PATH', BASE_PATH.'/nova-themes/'.Site::theme());
-
-define('IMAGES_QUALITY', Site::config('imageQuality'));
 
 // load basics
 require 'core/Router.php';

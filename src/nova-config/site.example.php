@@ -12,12 +12,13 @@
       "400x400",
       2000
   ],
+  "imagesDirName": "galleries",
   "imageCache": 1,
   "imageSizeBig": 2000,
   "imageSizeThumb": "400x400",
   "imageQuality": 89,
   "sortAlbums": "newest",
   "sortImages": "newest",
-  "filesMaxCacheAge": 60,
+  "fileListMaxCacheAge": 60,
   "pagePassword": ""
 }

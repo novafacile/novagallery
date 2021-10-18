@@ -32,6 +32,12 @@ if(isset($_GET['order'])){
 // Todo:
 // Some protections for album name
 
+// 404 if album doesn't exists
+if(!file_exists(IMAGES_DIR.'/'.$album)) {
+  Template::render('404');
+  exit;
+}
+
 $gallery = new novaGallery(IMAGES_DIR.'/'.$album, true, $fileListMaxCacheAge);
 $parentPage = $gallery->parentAlbum($album);
 if($parentPage){

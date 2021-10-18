@@ -1,14 +1,14 @@
 <?php defined("NOVA") or die(); 
 
 // Home
-Router::add(Site::basePath(), function() {
+Router::add('/', function() {
   require 'auth.php';
   require 'pages/home.php';
 }, 'get');
 
 
 // Gallery
-Router::add(Site::basePath().'galleries/(.*)/cache/(.*)/(.*)', function($var1, $var2, $var3) {
+Router::add('/galleries/(.*)/cache/(.*)/(.*)', function($var1, $var2, $var3) {
   require 'auth.php';
   $album = rawurldecode($var1);
   $size = rawurldecode($var2);
@@ -16,7 +16,7 @@ Router::add(Site::basePath().'galleries/(.*)/cache/(.*)/(.*)', function($var1, $
   require 'image.php';
 }, 'get');
 
-Router::add(Site::basePath().'album/(.*)', function($var1) {
+Router::add('/album/(.*)', function($var1) {
   require 'auth.php';
   $album = rawurldecode($var1);
   require 'pages/album.php';
@@ -24,11 +24,11 @@ Router::add(Site::basePath().'album/(.*)', function($var1) {
 
 
 // Auth
-Router::add(Site::basePath().'login', function() {
+Router::add('/login', function() {
   require 'pages/login.php';
 }, ['get', 'post']);
 
-Router::add(Site::basePath().'logout', function() {
+Router::add('/logout', function() {
   require 'pages/logout.php';
 }, 'get');
 
@@ -39,7 +39,7 @@ Router::pathNotFound(function(){
 });
 
 // Run
-Router::run(Site::basePath());
+Router::run(BASE_PATH);
 
 
 

@@ -28,6 +28,10 @@ class Router {
     ));
   }
 
+  public static function getAll(){
+    return self::$routes;
+  }
+
   public static function pathNotFound($function) {
     self::$pathNotFound = $function;
   }
@@ -36,19 +40,34 @@ class Router {
     self::$methodNotAllowed = $function;
   }
 
-  public static function run($basepath = '/', $case_matters = false, $trailing_slash_matters = false) {
+  public static function run($basepath = '', $case_matters = false, $trailing_slash_matters = false, $multimatch = false) {
+
+    // The basepath never needs a trailing slash
+    // Because the trailing slash will be added using the route expressions
+    $basepath = rtrim($basepath, '/');
+
     // Parse current URL
     $parsed_url = parse_url($_SERVER['REQUEST_URI']);
 
-    if (isset($parsed_url['path']) && $parsed_url['path'] != '/') {
-    if ($trailing_slash_matters) {
-    $path = $parsed_url['path'];
-    } else {
-    $path = rtrim($parsed_url['path'], '/');
+    $path = '/';
+
+    // If there is a path available
+    if (isset($parsed_url['path'])) {
+      // If the trailing slash matters
+      if ($trailing_slash_matters) {
+        $path = $parsed_url['path'];
+      } else {
+        // If the path is not equal to the base path (including a trailing slash)
+        if($basepath.'/'!=$parsed_url['path']) {
+          // Cut the trailing slash away because it does not matters
+          $path = rtrim($parsed_url['path'], '/');
+        } else {
+          $path = $parsed_url['path'];
+        }
+      }
     }
-    } else {
-      $path = '/';
-    }
+
+    $path = urldecode($path);
 
     // Get current request method
     $method = $_SERVER['REQUEST_METHOD'];
@@ -73,7 +92,7 @@ class Router {
       $route['expression'] = $route['expression'].'$';
 
       // Check path match
-      if (preg_match('#'.$route['expression'].'#'.($case_matters ? '' : 'i'), $path, $matches)) {
+      if (preg_match('#'.$route['expression'].'#'.($case_matters ? '' : 'i').'u', $path, $matches)) {
         $path_match_found = true;
 
         // Cast allowed method to array if it's not one already, then run through all methods
@@ -86,7 +105,9 @@ class Router {
               array_shift($matches); // Remove basepath
             }
 
-            call_user_func_array($route['function'], $matches);
+            if($return_value = call_user_func_array($route['function'], $matches)) {
+              echo $return_value;
+            }
 
             $route_match_found = true;
 
@@ -95,18 +116,22 @@ class Router {
           }
         }
       }
+
+      // Break the loop if the first found route is a match
+      if($route_match_found&&!$multimatch) {
+        break;
+      }
+
     }
 
     // No matching route was found
     if (!$route_match_found) {
       // But a matching path exists
       if ($path_match_found) {
-        header('HTTP/1.0 405 Method Not Allowed');
         if (self::$methodNotAllowed) {
           call_user_func_array(self::$methodNotAllowed, Array($path,$method));
         }
       } else {
-        header('HTTP/1.0 404 Not Found');
         if (self::$pathNotFound) {
           call_user_func_array(self::$pathNotFound, Array($path));
         }

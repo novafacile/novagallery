@@ -25,8 +25,8 @@
         <div class="row gallery px-2">
           <?php foreach($gallery->images($order) as $element => $modDate): ?>
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5 element">
-              <a href="<?php echo Site::url().Image::url($album, $element, Site::config('imageSizeBig')); ?>">
-                <img src="<?php echo Site::url().Image::url($album, $element, Site::config('imageSizeThumb')); ?>" loading="lazy" class="rounded"><br>
+              <a href="<?php echo Image::url($album, $element, Site::config('imageSizeBig')); ?>">
+                <img src="<?php echo Image::url($album, $element, Site::config('imageSizeThumb')); ?>" loading="lazy" class="rounded"><br>
               </a>
             </div>
           <?php endforeach ?>

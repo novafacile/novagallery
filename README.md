@@ -56,6 +56,11 @@ novaGallery is a beautiful php image gallery with the focus on your images, trim
 * In `nova-config/site.php` you can change some basic informations, image sizes and cache settings
 * That's it :-)
 
+#### Configuration for Installation in Subdir
+
+* Set RewriteBase in .htaccess (`RewriteBase /subdir/`)
+* Set url in `nova-config/site.php` with full subdir path
+
 ### Manage Images
 
 * **Add Photos**: Just upload the new photo to the server into the correct album (e.g via FTP)

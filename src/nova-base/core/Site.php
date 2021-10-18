@@ -10,12 +10,19 @@
 class Site {
   
   private static $config;
+  private static $basePath;
 
   public static function initialize(){
     if(file_exists(ROOT_DIR.'/nova-config/site.php')){
       self::$config = JsonDB::read(ROOT_DIR.'/nova-config/site.php');
     } else {
       die('ERROR: missing site config file');
+    }
+
+    self::$basePath = parse_url(self::$config->url,  PHP_URL_PATH);
+    $lastChar = substr(self::$basePath, -1);
+    if($lastChar == '/'){
+      self::$basePath = substr(self::$basePath, 0,-1);      
     }
   }
 
@@ -43,18 +50,11 @@ class Site {
   }
   
   public static function basePath(){
-    $basePath = BASE_PATH;
-
-    $lastChar = substr($basePath, -1);
-    if($lastChar !== '/'){
-      $basePath = $basePath.'/';      
-    }
-
-    return $basePath;
+    return self::$basePath;
   }
 
   public static function url(){
-   return self::$config->url.BASE_PATH; 
+   return self::$config->url; 
   }
 
 }

@@ -1,0 +1,10 @@
+<?php defined("NOVA") or die(); ?>
+{
+  "login": "Login",
+  "logout": "Logout",
+  "password": "Paswoord",
+  "back": "Terug",
+  "404-/-page-not-found": "404 / Pagina niet gevonden",
+  "sorry-this-page-does-not-seem-to-exist": "Sorry, deze pagina's lijken niet te bestaan.",
+  "back-to-home": "Terug naar de startpagina"
+}
