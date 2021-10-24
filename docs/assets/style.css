@@ -2,176 +2,126 @@
  * Style for novagallery.org
  * @author novafacile OÜ
  * @copyright 2021 novafacile OÜ
- *****/
+*******/
 
 body {
-  background-color: #222222;
+  background-color: #444444;
   color: #ffffff;
   font-weight: 300;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  line-height: 2rem;
+ }
+
+ strong {
+  font-weight: 600;
+ }
+
+a, 
+a.nav-link, a.nav-link:focus,
+a.navbar-brand:hover, a.navbar-brand:focus {
+  color: #ffffff;
 }
 
-a {
-  color: #fff;
-}
-
-a:hover {
-  color: #ccc;
+a:hover, a.nav-link:hover {
+  color: #cccccc;
 }
 
 code {
   color: #0dcaf0;
 }
 
-/** header **/
- header {
+
+header {
   background-image: url("../img/home-tobias-keller-unsplash.jpg");
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  color: #ffffff;
- }
+}
 
- @media (max-width: 810px) { /* fix for iOS with cover and fixed background */
+@media (max-width: 810px) { /* fix for iOS with cover and fixed background */
   header {
     background-attachment: initial !important;
   }
 }
 
- header .header-bg {
-  width: 100%;
-  height: 100%;
-  background: rgb(0, 0, 0, 0.7);
- }
-
- header .logo {
-  width: 80px;
-  height: auto;
-  margin-top: 18vh;
-  margin-bottom: 1.5rem;
- }
-
- header h1.display-4 {
-  letter-spacing: 0.1rem;
-  font-weight: 500;
-  padding-top: 19vh;
- }
-
- header p.lead {
-  font-size: 1.4rem;
- }
-
-header .icon {
-  color: #fdfdfd;
+h2 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 4rem;
 }
 
-@media (max-width: 576px){
-  header p.lead {
-    font-size: 1.1rem;
-   }
- }
-
-#scroll-to-lead {
-  cursor: pointer;
-  transition: 0.3s;
-  color: #999999;
- }
-
-#scroll-to-lead:hover {
-  color: #ffffff;
+@media (max-width: 400px) {
+  h2 {
+    font-size: 2.5rem;
+  }  
 }
 
-/** content **/
-content h2 {
-  margin-bottom: 1.5rem;
+
+article {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
-content h3 {
-  font-size: 1.4rem;
+.main {
+  position: relative;
 }
 
-content ul, content ol {
-  margin-bottom: 2rem;
-}
-content ul li, content ol li {
-  line-height: 2rem;
+.bg-dark {
+  background: #222222;
 }
 
-@media (max-width: 576px){
-  content ul, content ol {
-    padding-left: 1rem;
+.navbar-bg.scrolled {
+  background: rgba(0, 0, 0, 0.8);
+  height: 60px;
+  transition: all 0.7s;
+}
+
+
+#navbar {
+  font-size: 1.1rem;
+}
+
+.navbar-brand {
+  font-weight: 400;
+}
+
+
+.hero {
+  background: rgb(0, 0, 0, 0.5);
+}
+
+.hero article {
+  padding-top: 200px;
+}
+
+@media (max-height: 810px) {
+  .hero article {
+    padding-top: 150px;
   }
 }
 
-/** content section lead **/
-content section.lead {
-  margin: 5rem auto;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  line-height: 3rem;
+.hero h1 {
+  font-size: 4rem;
 }
 
-content section.lead p {
-  margin: 0;
+@media (max-width: 400px) {
+  .hero h1 {
+    font-size: 3.5rem;
+  }
+}
+
+@media (min-width:  400px){
+  .hero p {
+    font-size: 1.5rem;
+  }
+}
+
+.focus {
+  line-height: 2.5rem;
   font-size: 1.5rem;
   letter-spacing: 0.1rem;
 }
-
-@media (max-width: 576px){
-  content section.lead {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 450px){
-  content section.lead {
-    font-size: 1.0rem;
-  }
-}
-
-
-/** nav tabs **/
-.nav-tabs {
-  margin-top: 1rem;
-}
-
-.nav-tabs .nav-link,
-.nav-tabs .nav-link.nav-tabs .nav-item.show .nav-link,
-.nav-tabs .nav-link.active,
-.nav-tabs .nav-link:focus,
-.nav-tabs .nav-link:hover {
-  border: none;
-  border-radius: unset;
-  background: none;
-  margin-bottom: 1px;
-}
-
-.nav-tabs .nav-link.active {
-  color: #ffffff;
-  background-color: #444;
-}
-
-/** content articles **/
-content section {
-  margin-top: 5rem;
-}
-
-content article {
-  background: #444;
-  padding: 3rem;
-}
-
-@media (max-width: 768px){
-  content article {
-    padding: 3rem 1.5rem;
-  }
-}
-
-content article strong {
-  font-weight: 500;
-}
-
 
 .card {
   border: none;
@@ -190,6 +140,13 @@ content article strong {
   font-size: 1.8rem;
 }
 
+@media (max-width: 400px) {
+  .card .card-text {
+    font-size: 1.1rem;
+  }  
+}
+
+
 .card .btn-primary {
   background-color: #3C73CD;
 }
@@ -198,17 +155,22 @@ content article strong {
   background-color: #4C3BCC;
 }
 
-
-/** footer **/
-footer {
-  margin-top: 7rem;
-  padding-top: 5rem;
-  padding-bottom: 3rem;
-  background-color: #000000;
-  color: #ddd;
-  font-size: 1rem;
+#show-license {
+  cursor: pointer;
 }
 
-footer strong {
-  font-weight: 600;
+.license {
+  font-size: 1.1rem;
+}
+
+.license h3 {
+  font-size: 1.5rem;
+}
+
+.license h4 {
+  font-size: 1.3rem;
+}
+
+#show-privacy {
+  cursor: pointer;
 }

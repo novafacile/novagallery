@@ -1,102 +1,30 @@
-/*******
- * JS for novagallery.org
- * @author novafacile OÜ
- * @copyright 2021 novafacile OÜ
- *******/
 
-/*** trigger tab ***/
-function showTab(tabname) {
-  // get new tab content
-  let new_tab = document.querySelector(tabname + '-tab');
-  let new_content = document.querySelector(tabname + '-content');
-
-  // check if new content tab exists
-  if(!new_content){
-    // abort if not available
-    return;
-  }
-  
-  // remove all active states
-  let nav = document.querySelectorAll('.nav-link.active');
-  nav.forEach(function(el){
-    el.classList.remove('active');
+$(document).ready(function() {
+  $( "#show-license" ).click(function() {
+    $(".license-toggle").toggle();
   });
 
-  let content = document.querySelectorAll('.tab-pane.active');
-  content.forEach(function(el){
-    el.classList.remove('active');
-    el.classList.remove('show');
+  $( "#show-privacy" ).click(function() {
+    $(".privacy-toggle").toggle();
   });
 
-  // add active state to element
-  new_tab.classList.add('active');
-  new_content.classList.add('active');
-  new_content.classList.add('show');
-
-  return true;
-}
-
-/*** scroll to element by id ***/
-function scrollTo(id){
-  let el = document.querySelector(id);
-  el.scrollIntoView({
-    block: 'start',
-    behavior: 'smooth',
-    inline: 'start'
-  });
-}
-
-/*** anchor validator ***/
-function validateAnchor(anchor){
-  let res = anchor.match(/[^#\w]+/g);
-  if(res){
-    // return false if not match with regular anchor
-    return false
-  } else {
-    return true;
-  }
-}
-
-
-/*** bind events ***/
-document.addEventListener("DOMContentLoaded", (event) => {
-
-  // act on anchor in url
-  try {
-    let anchor = window.top.location.hash;
-    if(!validateAnchor(anchor)){ // validate if regular anchor
-      return false; 
+  $(window).scroll(function(){
+    if ($(this).scrollTop() > 100) {
+      $('.navbar-bg').addClass('scrolled');
+    } else {
+      $('.navbar-bg').removeClass('scrolled');
     }
-    let firstEl = document.querySelector(anchor + '-content');
-    if(firstEl){
-      showTab(anchor);
-      scrollTo('#content');
-    }  
-  } catch (e){
-    // ignore
-  }
-  
-  // more info link
-  document.querySelector("#scroll-to-lead").addEventListener("click", function(){
-    showTab('#home');
-    scrollTo('#lead');
   });
 
-  // bind event listener on buttons
-  document.querySelectorAll('.navi-btn').forEach(function(el){
-    el.addEventListener('click', function(event){
-      event.preventDefault();
-      let target = el.getAttribute('href');
-      if(target){
-        if(!validateAnchor(target)){ // validate if regular anchor
-          return false; 
-        }
-      showTab(target);
-      scrollTo('#content');
-      } else {
-        showTab('#home');
-      }
-    });
+  // ScrollTo https://www.taniarascia.com/smooth-scroll-to-id-with-jquery/
+  $('a[href*="#"]').on('click', function (e) {
+    e.preventDefault()
+    $('html, body').animate({
+        scrollTop: $($(this).attr('href')).offset().top,
+      },
+      500,
+      'linear'
+    )
   });
 
-})
+});
