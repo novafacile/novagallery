@@ -196,7 +196,7 @@ class novaGallery {
     $cacheFile = $dir.'/'.$this->cacheDir.'/'.$this->cacheFile;
     if(file_exists($cacheFile)){
       $age = time() - filemtime($cacheFile);
-      if($age > $maxAge) {
+      if($age > $maxAge || !$maxAge) {
         return false;
       }
 
@@ -268,7 +268,6 @@ class novaGallery {
       return key($images);
     } 
 
-    // get images of sub albums if exists (only for version with sub albums)
     $subGallery = new novaGallery($this->dir.'/'.$album);
     if($subGallery->hasAlbums()){
       $albums = $subGallery->albums($order);
