@@ -19,6 +19,6 @@ Page::addData('order', $order);
 Page::addData('album', '');
 Page::addData('gallery', $gallery);
 
-Template::render('album');
+Template::render('home');
 
 ?>
