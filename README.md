@@ -68,7 +68,6 @@ novaGallery is a beautiful php image gallery with the focus on your images, trim
 * **Delete an Album**: Just delete the whole album (directory) at the server
 * **Reset Cache**: Every album has a cache directory. Just delete this directory.
 
-
 ### Themes
 
 * Two basic themes are included: novagallery (default, dark) and novagallery-light
@@ -97,6 +96,11 @@ novaGallery is a beautiful php image gallery with the focus on your images, trim
 ## Support
 
 * For support just open a ticket: [novaGallery Support](https://github.com/novafacile/novagallery/issues)
+
+## Support Development: Pro Version without contribution
+
+* To support the development you can buy the Pro version for only $15. This contains exactly the same features as the free version but the mention of "powerd by novaGallery" in the footer is no longer required. In addition, every Pro Version user has the possibility to receive personal support via email.
+* Get the Pro Version: [Buy novaGallery Pro Version](https://novagallery.org/#download)
 
 ## Contribution
 
