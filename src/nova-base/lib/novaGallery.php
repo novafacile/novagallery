@@ -4,6 +4,7 @@
  * @author novafacile OÜ
  * @copyright Copyright (c) 2021 by novafacile OÜ
  * @license AGPL-3.0
+ * @version 1.1.1
  * @link https://novagallery.org
  * to disable cache just set maxCacheAge to 'false' on initialization
  **/
@@ -13,13 +14,17 @@ class novaGallery {
   protected $dir = '';
   protected $images = array();
   protected $albums = array();
+  protected $onlyWithImages = true;
+  protected $maxCacheAge = 60;
   protected $cacheDir = 'cache';
   protected $cacheFile = 'files.php';
 
   function __construct($dir, $onlyWithImages = true, $maxCacheAge = 60){
     $this->dir = $dir;
+    $this->maxCacheAge = $maxCacheAge;
+    $this->onlyWithImages = $onlyWithImages;
 
-    if(!$maxCacheAge || !$this->readCache($dir, $maxCacheAge)){
+    if(!$this->maxCacheAge || !$this->readCache($dir, $maxCacheAge)){
       $this->images = $this->getImages($dir);
       $this->albums = $this->getAlbums($dir);
       if($maxCacheAge) {
@@ -196,7 +201,7 @@ class novaGallery {
     $cacheFile = $dir.'/'.$this->cacheDir.'/'.$this->cacheFile;
     if(file_exists($cacheFile)){
       $age = time() - filemtime($cacheFile);
-      if($age > $maxAge || !$maxAge) {
+      if($age > $maxAge) {
         return false;
       }
 
@@ -268,16 +273,17 @@ class novaGallery {
       return key($images);
     } 
 
-    $subGallery = new novaGallery($this->dir.'/'.$album);
+    $subGallery = new novaGallery($this->dir.'/'.$album, $this->onlyWithImages, $this->maxCacheAge);
     if($subGallery->hasAlbums()){
       $albums = $subGallery->albums($order);
-      $firstAlbum = reset($albums);
-      $albumName = key($albums);
-      reset($firstAlbum);
-      $image = key($firstAlbum);
-      return $albumName.'/'.$image;
+      $firstAlbum = array_key_first($albums);
+      $coverImage = $subGallery->coverImage($firstAlbum, $order);
+      if($coverImage){
+        return $firstAlbum.'/'.$coverImage;
+      } else {
+        return $firstAlbum;
+      }
     }
-
     // else return false
     return false;
   }
