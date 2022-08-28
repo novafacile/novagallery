@@ -34,6 +34,8 @@ novaGallery is a beautiful php image gallery with the focus on your images, trim
 ### Requirements
 
 * Apache web server or similar
+* Apache: enabled mod_rewrite and .htaccess support
+* Other webserver: Individual settings in config to route all requests throw index.php
 * PHP 7.X
 * PHP-GD Extension
 * PHP Exif Support
@@ -92,6 +94,10 @@ novaGallery is a beautiful php image gallery with the focus on your images, trim
 * Supported images: JPEG & PNG
 * At the first time an album is opened, the thumbnails are generated. This may take a little time. After that the cached images are used for each visit.
 * If you don't use an apache2 web server with .htaccess support (e.g. nginx), you have to set the required rewrite rules from the .htaccess file at the webserver config
+
+## Troubleshooting
+
+* If thumbnails and images are not generated, in most cases it's missing mod_rewrite or htacces support
 
 ## Support
 
