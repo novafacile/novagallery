@@ -132,6 +132,19 @@ class novaGallery {
     return $iTimestamp;
   }
 
+  protected function shuffle_assoc(&$array) {
+        $keys = array_keys($array);
+
+        shuffle($keys);
+
+        foreach($keys as $key) {
+            $new[$key] = $array[$key];
+        }
+    
+        $array = $new;
+        return true;
+  }
+  
   protected function order($list, $order){
     switch ($order) {
       case 'oldest':
@@ -139,6 +152,9 @@ class novaGallery {
         break;
       case 'newest':
         arsort($list);
+        break;
+      case 'random':
+        $this->shuffle_assoc($list);
         break;
       default:
         // order by name
