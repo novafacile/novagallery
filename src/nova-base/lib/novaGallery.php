@@ -132,17 +132,15 @@ class novaGallery {
     return $iTimestamp;
   }
 
-  protected function shuffle_assoc(&$array) {
+  protected function shuffle_assoc($array) {
         $keys = array_keys($array);
-
         shuffle($keys);
 
         foreach($keys as $key) {
             $new[$key] = $array[$key];
         }
-    
-        $array = $new;
-        return true;
+
+        return $new;
   }
   
   protected function order($list, $order){
@@ -154,7 +152,7 @@ class novaGallery {
         arsort($list);
         break;
       case 'random':
-        $this->shuffle_assoc($list);
+        $list = $this->shuffle_assoc($list);
         break;
       default:
         // order by name
