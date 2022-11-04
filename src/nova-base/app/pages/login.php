@@ -24,5 +24,3 @@ if(isset($_POST['password'])){
 
 
 Template::render('login');
-
-?>

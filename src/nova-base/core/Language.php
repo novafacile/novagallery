@@ -45,5 +45,3 @@ class Language {
 class L extends Language {
   
 }
-
-?>
