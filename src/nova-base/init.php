@@ -58,5 +58,3 @@ L::initialize(Site::config('language'));
 
 // load routes
 require 'app/router.php';
-
-?>

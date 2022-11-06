@@ -16,8 +16,3 @@ class Template {
   }
 
 }
-
-
-
-
-?>

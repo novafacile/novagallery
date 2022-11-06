@@ -332,5 +332,3 @@ class novaGallery {
   }
 
 }
-
-?>

@@ -51,5 +51,3 @@ Page::addData('parentPage', $parentPage);
 
 
 Template::render('album');
-
-?>

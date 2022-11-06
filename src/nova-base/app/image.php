@@ -9,5 +9,3 @@ if(in_array($size, Site::config('allowedImageSizes'))){
 } else {
   header('HTTP/1.0 404 Not Found');
 }
-
-?>
