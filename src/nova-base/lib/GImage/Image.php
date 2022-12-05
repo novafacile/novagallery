@@ -2,7 +2,7 @@
 /*
  * This file is part of GImage.
  *
- * (c) José Luis Quintana <https://git.io/joseluisq>
+ * (c) Jose Quintana <https://joseluisq.net>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -14,55 +14,52 @@ namespace GImage;
  * A simple extended GD class for easy image handling.
  * This is the parent class for Figure and Canvas.
  *
- * @package GImage
- * @author José Luis Quintana <http://git.io/joseluisq>
+ * @author Jose Quintana <http://git.io/joseluisq>
  *
- * @property string $name
- * @property string $filename
- * @property int $width
- * @property int $height
- * @property int $x
- * @property int $y
- * @property int $boxWidth
- * @property int $boxHeight
- * @property int $boxX
- * @property int $boxY
- * @property int $type IMAGETYPE_JPEG
- * @property string $extension Default 'jpg'
- * @property resource $resource
- * @property int $quality
- * @property int $opacity From 0 to 1
- * @property string $from Default 'local'
- * @property bool $preserve Default FALSE
- * @property string $mimetype Default 'image/jpeg'
+ * @property string   $name
+ * @property string   $filename
+ * @property int      $width
+ * @property int      $height
+ * @property int      $x
+ * @property int      $y
+ * @property int      $boxWidth
+ * @property int      $boxHeight
+ * @property int      $boxX
+ * @property int      $boxY
+ * @property int      $type              IMAGETYPE_JPEG
+ * @property string   $extension         Default 'jpg'
+ * @property resource $resource|\GdImage
+ * @property int      $quality
+ * @property int      $opacity           From 0 to 1
+ * @property string   $from              Default 'local'
+ * @property bool     $preserve          Default FALSE
+ * @property string   $mimetype          Default 'image/jpeg'
  */
 class Image
 {
     protected $name;
     protected $filename;
-    protected $width = 0;
-    protected $height = 0;
-    protected $x = 0;
-    protected $y = 0;
-    protected $boxWidth = 0;
+    protected $width     = 0;
+    protected $height    = 0;
+    protected $x         = 0;
+    protected $y         = 0;
+    protected $boxWidth  = 0;
     protected $boxHeight = 0;
-    protected $boxX = 0;
-    protected $boxY = 0;
-    protected $type = IMAGETYPE_JPEG;
+    protected $boxX      = 0;
+    protected $boxY      = 0;
+    protected $type      = IMAGETYPE_JPEG;
     protected $extension = 'jpg';
     protected $resource;
-    protected $quality = 100;
-    protected $opacity = 1;
-    protected $from = 'local';
+    protected $quality  = 100;
+    protected $opacity  = 1;
+    protected $from     = 'local';
     protected $preserve = false;
     protected $mimetype = 'image/jpeg';
 
     /**
      * Loads an image from Image or Figure class.
      *
-     * @package GImage
-     * @access public
-     * @param Image $element Image or Figure class.
+     * @param Image $element image or Figure class
      */
     public function __construct($element = null)
     {
@@ -72,9 +69,9 @@ class Image
     /**
      * Loads an image from Image or Figure class.
      *
-     * @access public
-     * @param Image $element Image or Figure class.
-     * @return \GImage\Image
+     * @param Image $element image or Figure class
+     *
+     * @return \GImage\Image|static
      */
     public function from($element = null)
     {
@@ -90,10 +87,9 @@ class Image
     /**
      * Loads an image from a local path, external url or image string.
      *
-     * @package GImage
-     * @access public
-     * @param string $src Local path, external url or image string.
-     * @return \GImage\Image
+     * @param string $src local path, external url or image string
+     *
+     * @return \GImage\Image|static
      */
     public function load($src)
     {
@@ -101,10 +97,16 @@ class Image
             return $this;
         }
 
-        if ($this->isImageStringByString($src)) {
+        // 1. resource or \GdImage
+        if (is_resource($src) || $src instanceof \GdImage) {
+            $this->loadImageFromResource($src);
+        // 2. string image
+        } elseif (is_string($src) && $this->isImageStringByString($src)) {
             $this->loadImageFromString($src);
+        // 3. string url image path
         } elseif (filter_var($src, FILTER_VALIDATE_URL)) {
             $this->loadImageFromURL($src);
+        // 4. string file path
         } elseif (is_file($src)) {
             $this->loadImageFromFile($src);
         }
@@ -115,7 +117,8 @@ class Image
     /**
      * Load an image from URL.
      *
-     * @param  string $url Image URL
+     * @param string $url Image URL
+     *
      * @return void
      */
     private function loadImageFromURL($url)
@@ -127,27 +130,28 @@ class Image
         }
 
         if (Utils::isJPGResource($image)) {
-            $this->filename = $url;
+            $this->filename  = $url;
             $this->extension = 'jpg';
-            $this->type = IMAGETYPE_JPEG;
+            $this->type      = IMAGETYPE_JPEG;
         }
 
         if (Utils::isPNGResource($image)) {
-            $this->filename = $url;
+            $this->filename  = $url;
             $this->extension = 'png';
-            $this->type = IMAGETYPE_PNG;
+            $this->type      = IMAGETYPE_PNG;
         }
 
-        $this->from = 'external';
+        $this->from     = 'external';
         $this->resource = imagecreatefromstring($image);
-        $this->width = $this->boxWidth = imagesx($this->resource);
-        $this->height = $this->boxHeight = imagesy($this->resource);
+        $this->width    = $this->boxWidth    = imagesx($this->resource);
+        $this->height   = $this->boxHeight   = imagesy($this->resource);
     }
 
     /**
      * Fetch an image string content from URL.
      *
-     * @param  string $url Image URL.
+     * @param string $url image URL
+     *
      * @return string String data
      */
     private function fetchImageContentFromURL($url)
@@ -163,33 +167,52 @@ class Image
     }
 
     /**
+     * Load an image from a resource or `\GdImage`.
+     *
+     * @param string $resource image resource or `\GdImage`
+     *
+     * @return void
+     */
+    private function loadImageFromResource($resource)
+    {
+        $this->extension = 'png';
+        $this->type      = IMAGETYPE_PNG;
+        $this->from      = is_resource($resource) ? 'resource' : 'gdimage';
+        $this->resource  = $resource;
+        $this->width     = $this->boxWidth     = imagesx($this->resource);
+        $this->height    = $this->boxHeight    = imagesy($this->resource);
+    }
+
+    /**
      * Load an image from image string.
      *
-     * @param  string $imagestring Image string
+     * @param string $imagestring Image string
+     *
      * @return void
      */
     private function loadImageFromString($imagestring)
     {
         if (Utils::isJPGResource($imagestring)) {
             $this->extension = 'jpg';
-            $this->type = IMAGETYPE_JPEG;
+            $this->type      = IMAGETYPE_JPEG;
         }
 
         if (Utils::isPNGResource($imagestring)) {
             $this->extension = 'png';
-            $this->type = IMAGETYPE_PNG;
+            $this->type      = IMAGETYPE_PNG;
         }
 
-        $this->from = 'imagestring';
+        $this->from     = 'imagestring';
         $this->resource = imagecreatefromstring($imagestring);
-        $this->width = $this->boxWidth = imagesx($this->resource);
-        $this->height = $this->boxHeight = imagesy($this->resource);
+        $this->width    = $this->boxWidth    = imagesx($this->resource);
+        $this->height   = $this->boxHeight   = imagesy($this->resource);
     }
 
     /**
      * Checks if string is Image string.
      *
-     * @param  string $imagestring Image string.
+     * @param string $imagestring image string
+     *
      * @return bool
      */
     private function isImageStringByString($imagestring)
@@ -200,53 +223,53 @@ class Image
     /**
      * Load an image file from path.
      *
-     * @param  string $filepath File path
+     * @param string $filepath File path
+     *
      * @return void
      */
     private function loadImageFromFile($filepath)
     {
-        $this->from = 'local';
+        $this->from     = 'local';
         $this->filename = $filepath;
 
         if (!is_readable($filepath)) {
             return;
         }
 
-        $image = null;
-        $extension = '';
+        $image                            = null;
+        $extension                        = '';
         list($width, $height, $imageType) = getimagesize($filepath);
 
         switch ($imageType) {
             case IMAGETYPE_GIF:
                 $extension = 'gif';
-                $image = imagecreatefromgif($filepath);
+                $image     = imagecreatefromgif($filepath);
                 break;
 
             case IMAGETYPE_PNG:
                 $extension = 'png';
-                $image = imagecreatefrompng($filepath);
+                $image     = imagecreatefrompng($filepath);
                 break;
 
             case IMAGETYPE_JPEG:
                 $extension = 'jpg';
-                $image = imagecreatefromjpeg($filepath);
+                $image     = imagecreatefromjpeg($filepath);
                 break;
         }
 
         if ($image) {
-            $this->type = $imageType;
-            $this->resource = $image;
+            $this->type      = $imageType;
+            $this->resource  = $image;
             $this->extension = $extension;
-            $this->width = $this->boxWidth = $width;
-            $this->height = $this->boxHeight = $height;
+            $this->width     = $this->boxWidth     = $width;
+            $this->height    = $this->boxHeight    = $height;
         }
     }
 
     /**
-     * Gets resource of the image.
+     * Gets the resource or `\GdImage` object (PHP 8.0+) of the image.
      *
-     * @access public
-     * @return resource
+     * @return resource|\GdImage
      */
     public function getResource()
     {
@@ -256,7 +279,6 @@ class Image
     /**
      * Gets filename path of the image.
      *
-     * @access public
      * @return string
      */
     public function getFilename()
@@ -267,7 +289,6 @@ class Image
     /**
      * Gets the image file name.
      *
-     * @access public
      * @return string
      */
     public function getName()
@@ -276,9 +297,8 @@ class Image
     }
 
     /**
-     * Gets the image type code (IMAGETYPE_JPEG, IMAGETYPE_PNG or IMAGETYPE_GIF)
+     * Gets the image type code (IMAGETYPE_JPEG, IMAGETYPE_PNG or IMAGETYPE_GIF).
      *
-     * @access public
      * @return int
      */
     public function getType()
@@ -289,7 +309,6 @@ class Image
     /**
      * Gets extension (jpg, png or gif).
      *
-     * @access public
      * @return string
      */
     public function getExtension()
@@ -300,7 +319,6 @@ class Image
     /**
      * Gets quality.
      *
-     * @access public
      * @return int
      */
     public function getQuality()
@@ -311,7 +329,6 @@ class Image
     /**
      * Gets opacity.
      *
-     * @access public
      * @return int
      */
     public function getOpacity()
@@ -322,7 +339,6 @@ class Image
     /**
      * Gets width.
      *
-     * @access protected
      * @return int
      */
     public function getWidth()
@@ -331,11 +347,10 @@ class Image
     }
 
     /**
-    * Gets height.
-    *
-    * @access public
-    * @return int
-    */
+     * Gets height.
+     *
+     * @return int
+     */
     public function getHeight()
     {
         return $this->height;
@@ -344,7 +359,6 @@ class Image
     /**
      * Gets top position.
      *
-     * @access protected
      * @return int
      */
     public function getTop()
@@ -355,7 +369,6 @@ class Image
     /**
      * Gets left position.
      *
-     * @access public
      * @return int
      */
     public function getLeft()
@@ -366,7 +379,6 @@ class Image
     /**
      * Gets box left position.
      *
-     * @access public
      * @return int
      */
     public function getBoxLeft()
@@ -377,7 +389,6 @@ class Image
     /**
      * Gets box top position.
      *
-     * @access protected
      * @return int
      */
     public function getBoxTop()
@@ -388,7 +399,6 @@ class Image
     /**
      * Gets box width.
      *
-     * @access public
      * @return int
      */
     public function getBoxWidth()
@@ -399,7 +409,6 @@ class Image
     /**
      * Gets box height.
      *
-     * @access public
      * @return int
      */
     public function getBoxHeight()
@@ -410,7 +419,6 @@ class Image
     /**
      * Gets where the image was loaded: 'local' or 'external'.
      *
-     * @access public
      * @return string
      */
     public function getLoadedFrom()
@@ -422,12 +430,13 @@ class Image
      * Sets quality for image.
      *
      * @param int $quality Quality value from 0 to 100
-     * @access public
-     * @return \GImage\Image
+     *
+     * @return \GImage\Image|static
      */
     public function setQuality($quality)
     {
         $this->quality = $quality;
+
         return $this;
     }
 
@@ -435,233 +444,256 @@ class Image
      * Sets opacity.
      *
      * @param int $opacity Opacity value from 0 to 127
-     * @access public
-     * @return \GImage\Image
+     *
+     * @return \GImage\Image|static
      */
     public function setOpacity($opacity)
     {
         $this->opacity = $opacity > 127 ? 127 : $opacity;
+
         return $this;
     }
 
     /**
      * Sets image resource.
      *
-     * @param resource $resource resource.
-     * @access public
-     * @return \GImage\Image
+     * @param resource $resource resource
+     *
+     * @return \GImage\Image|static
      */
     public function setResource($resource)
     {
         $this->resource = $resource;
+
         return $this;
     }
 
     /**
      * Sets left position of image.
      *
-     * @param int $x left.
-     * @access public
-     * @return \GImage\Image
+     * @param int $x left
+     *
+     * @return \GImage\Image|static
      */
     public function setLeft($x)
     {
         $this->x = $x;
+
         return $this;
     }
 
     /**
      * Sets top position of image.
      *
-     * @param int $y top.
-     * @access public
-     * @return \GImage\Image
+     * @param int $y top
+     *
+     * @return \GImage\Image|static
      */
     public function setTop($y)
     {
         $this->y = $y;
+
         return $this;
     }
 
     /**
      * Sets width of box image.
      *
-     * @param int $width width.
-     * @access public
-     * @return \GImage\Image
+     * @param int $width width
+     *
+     * @return \GImage\Image|static
      */
     public function setBoxWidth($width)
     {
         $this->boxWidth = $width;
+
         return $this;
     }
 
     /**
      * Sets height of box image.
      *
-     * @param int $height height.
-     * @access public
-     * @return \GImage\Image
+     * @param int $height height
+     *
+     * @return \GImage\Image|static
      */
     public function setBoxHeight($height)
     {
         $this->boxHeight = $height;
+
         return $this;
     }
 
     /**
      * Sets left position of box image.
      *
-     * @param int $x Left position.
-     * @access public
-     * @return \GImage\Image
+     * @param int $x left position
+     *
+     * @return \GImage\Image|static
      */
     public function setBoxLeft($x)
     {
         $this->boxX = $x * (-1);
+
         return $this;
     }
 
     /**
      * Sets top position of box image.
      *
-     * @param int $y Top position.
-     * @access public
-     * @return \GImage\Image
+     * @param int $y top position
+     *
+     * @return \GImage\Image|static
      */
     public function setBoxTop($y)
     {
         $this->boxY = $y * (-1);
+
         return $this;
     }
 
     /**
      * Checks if image was loaded from local path.
      *
-     * @access public
      * @return bool
      */
     public function isLocal()
     {
-        return ($this->from == 'local');
+        return $this->from == 'local';
     }
 
     /**
      * Checks if image was loaded from external url.
      *
-     * @access public
      * @return bool
      */
     public function isExternal()
     {
-        return ($this->from == 'external');
+        return $this->from == 'external';
     }
 
     /**
      * Checks if image was loaded from image string.
      *
-     * @access public
      * @return bool
      */
     public function isImageString()
     {
-        return ($this->from == 'imagestring');
+        return $this->from == 'imagestring';
+    }
+
+    /**
+     * Checks if image was loaded from an image resource (PHP 7.4).
+     *
+     * @return bool
+     */
+    public function isImageResource()
+    {
+        return $this->from == 'resource';
+    }
+
+    /**
+     * Checks if image was loaded from a `\GdImage` object (PHP 8.0+).
+     *
+     * @return bool
+     */
+    public function isImageGdImage()
+    {
+        return $this->from == 'gdimage';
     }
 
     /**
      * Checks if image is a JPG.
      *
-     * @access public
      * @return bool
      */
     public function isJPG()
     {
-        return ($this->extension == 'jpg');
+        return $this->extension == 'jpg';
     }
 
     /**
      * Checks if image is a PNG.
      *
-     * @access public
      * @return bool
      */
     public function isPNG()
     {
-        return ($this->extension == 'png');
+        return $this->extension == 'png';
     }
 
     /**
      * Checks if image is a GIF.
      *
-     * @access public
      * @return bool
      */
     public function isGIF()
     {
-        return ($this->extension == 'gif');
+        return $this->extension == 'gif';
     }
 
     /**
      * Changes output format to JPG.
      *
-     * @access public
-     * @return \GImage\Image
+     * @return \GImage\Image|static
      */
     public function toJPG()
     {
         $this->extension = 'jpg';
-        $this->type = IMAGETYPE_JPEG;
-        $this->mimetype = Utils::getMimetypeByImageType(IMAGETYPE_JPEG);
+        $this->type      = IMAGETYPE_JPEG;
+        $this->mimetype  = Utils::getMimetypeByImageType(IMAGETYPE_JPEG);
+
         return $this;
     }
 
     /**
      * Changes output format to PNG.
      *
-     * @access public
-     * @return \GImage\Image
+     * @return \GImage\Image|static
      */
     public function toPNG()
     {
         $this->extension = 'png';
-        $this->type = IMAGETYPE_PNG;
-        $this->mimetype = Utils::getMimetypeByImageType(IMAGETYPE_PNG);
+        $this->type      = IMAGETYPE_PNG;
+        $this->mimetype  = Utils::getMimetypeByImageType(IMAGETYPE_PNG);
+
         return $this;
     }
 
     /**
      * Changes output format to GIF.
      *
-     * @access public
-     * @return \GImage\Image
+     * @return \GImage\Image|static
      */
     public function toGIF()
     {
         $this->extension = 'gif';
-        $this->type = IMAGETYPE_GIF;
-        $this->mimetype = Utils::getMimetypeByImageType(IMAGETYPE_GIF);
+        $this->type      = IMAGETYPE_GIF;
+        $this->mimetype  = Utils::getMimetypeByImageType(IMAGETYPE_GIF);
+
         return $this;
     }
 
     /**
      * Preserves the resource image when save or output function is called.
      *
-     * @access public
-     * @param bool $preserve If it's true will preserve the resource image.
-     * @return \GImage\Image
+     * @param bool $preserve if it's true will preserve the resource image
+     *
+     * @return \GImage\Image|static
      */
     public function preserve($preserve = true)
     {
         $this->preserve = $preserve;
+
         return $this;
     }
 
     /**
      * Resize image proportionally basing on the height of the image.
      *
-     * @access public
      * @param int $height
-     * @return \GImage\Image
+     *
+     * @return \GImage\Image|static
      */
     public function resizeToHeight($height)
     {
@@ -674,9 +706,9 @@ class Image
     /**
      * Resize image proportionally basing on the width of the image.
      *
-     * @access public
      * @param int $width
-     * @return \GImage\Image
+     *
+     * @return \GImage\Image|static
      */
     public function resizeToWidth($width)
     {
@@ -689,45 +721,45 @@ class Image
     /**
      * Gets proportional width of image from height value.
      *
-     * @access public
      * @param int $height
+     *
      * @return int
      */
     public function getPropWidth($height)
     {
-        $ratio = (int) $height / $this->height;
-        return $this->width * $ratio;
+        $ratio = $height / $this->height;
+
+        return (int) floor($this->width * $ratio);
     }
 
     /**
      * Gets proportional height of image from width value.
      *
-     * @access public
      * @param int $width
+     *
      * @return int
      */
     public function getPropHeight($width)
     {
-        $ratio = (int) $width / $this->width;
+        $ratio = $width / $this->width;
 
-        return $this->height * $ratio;
+        return (int) floor($this->height * $ratio);
     }
 
     /**
      * Scales the image.
      *
-     * @access public
-     * @param int|double $scale
-     * @return \GImage\Image
+     * @param int|float $scale
+     *
+     * @return \GImage\Image|static
      */
     public function scale($scale = 1)
     {
-        if ($scale > 1) {
-            $scale = 1;
-        }
+        $scale = $scale > 1 ? 1 : $scale;
+        $scale = $scale < 0 ? 0 : $scale;
 
-        $width = (int) $this->width * $scale;
-        $height = (int) $this->height * $scale;
+        $width  = (int) floor($this->width * $scale);
+        $height = (int) floor($this->height * $scale);
 
         $this->resize($width, $height);
 
@@ -737,9 +769,9 @@ class Image
     /**
      * Rotate the image with a given angle.
      *
-     * @access public
      * @param int $angle
-     * @return \GImage\Image
+     *
+     * @return \GImage\Image|static
      */
     public function rotate($angle = 0)
     {
@@ -753,14 +785,14 @@ class Image
     /**
      * Cuts the image proportionally and centered.
      *
-     * @access public
-     * @param int $width Width crop.
-     * @param int $height Height crop.
-     * @return \GImage\Image
+     * @param int $width  width crop
+     * @param int $height height crop
+     *
+     * @return \GImage\Image|static
      */
     public function centerCrop($width, $height)
     {
-        $pwidth = $this->getPropWidth($height);
+        $pwidth  = $this->getPropWidth($height);
         $pheight = $this->getPropHeight($width);
 
         if ($pwidth == $width && $pheight == $height) {
@@ -773,8 +805,8 @@ class Image
                 $this->resizeToHeight($pheight);
             }
 
-            $x = ($this->width - $width) / 2;
-            $y = ($this->height - $height) / 2;
+            $x = (int) floor(($this->width - $width) / 2);
+            $y = (int) floor(($this->height - $height) / 2);
             $this->crop($width, $height, $x, $y);
         }
 
@@ -784,14 +816,14 @@ class Image
     /**
      * Cuts part of image.
      *
-     * @access public
-     * @param int $width Width crop.
-     * @param int $height Height crop.
-     * @param int $x1 [Optional] x-coordinate of source point.
-     * @param int $y1 [Optional] y-coordinate of source point.
-     * @param int $dstX [Optional] x-coordinate of destination point.
-     * @param int $dstY [Optional] y-coordinate of destination point.
-     * @return \GImage\Image
+     * @param int $width  width crop
+     * @param int $height height crop
+     * @param int $x1     [Optional] x-coordinate of source point
+     * @param int $y1     [Optional] y-coordinate of source point
+     * @param int $dstX   [Optional] x-coordinate of destination point
+     * @param int $dstY   [Optional] y-coordinate of destination point
+     *
+     * @return \GImage\Image|static
      */
     public function crop($width, $height, $x1 = 0, $y1 = 0, $dstX = 0, $dstY = 0)
     {
@@ -803,15 +835,15 @@ class Image
     /**
      * Resizes the image.
      *
-     * @access private
-     * @param int $width Image's width.
-     * @param int $height Image's height.
-     * @param int $x1 [Optional] Left position
-     * @param int $y1 [Optional] Top position
-     * @param int $dstX [Optional] x-coordinate of destination point.
-     * @param int $dstY [Optional] y-coordinate of destination point.
-     * @param bool $isCrop [Optional] if it's true resize function will crop the image.
-     * @return \GImage\Image
+     * @param int  $width  image's width
+     * @param int  $height image's height
+     * @param int  $x1     [Optional] Left position
+     * @param int  $y1     [Optional] Top position
+     * @param int  $dstX   [Optional] x-coordinate of destination point
+     * @param int  $dstY   [Optional] y-coordinate of destination point
+     * @param bool $isCrop [Optional] if it's true resize function will crop the image
+     *
+     * @return \GImage\Image|static
      */
     private function resize($width, $height, $x1 = 0, $y1 = 0, $dstX = 0, $dstY = 0, $isCrop = false)
     {
@@ -837,8 +869,8 @@ class Image
             );
 
             $this->resource = $image;
-            $this->width = $this->boxWidth = imagesx($this->resource);
-            $this->height = $this->boxHeight = imagesy($this->resource);
+            $this->width    = $this->boxWidth    = imagesx($this->resource);
+            $this->height   = $this->boxHeight   = imagesy($this->resource);
         }
 
         return $this;
@@ -847,10 +879,10 @@ class Image
     /**
      * Saves the image to specific path.
      *
-     * @access public
-     * @param string $filename If it's null save function will save the image
-     * in load path for default.
-     * @return \GImage\Image
+     * @param string $filename if it's null save function will save the image
+     *                         in load path for default
+     *
+     * @return \GImage\Image|static
      */
     public function save($filename = null)
     {
@@ -860,8 +892,7 @@ class Image
     /**
      * Outputs the image on browser.
      *
-     * @access public
-     * @return \GImage\Image
+     * @return \GImage\Image|static
      */
     public function output()
     {
@@ -871,8 +902,7 @@ class Image
     /**
      * Render the image in-memory and return the resource.
      *
-     * @access public
-     * @return resource | null  Return the resource or null.
+     * @return resource | null  Return the resource or null
      */
     public function render()
     {
@@ -895,10 +925,10 @@ class Image
     /**
      * Output the image to either the browser or a file.
      *
-     * @access private
      * @param string $filename [Optional] Path to save image
-     * @param bool $output [Optional] true to output the image.
-     * @return \GImage\Image | resource
+     * @param bool   $output   [Optional] true to output the image
+     *
+     * @return \GImage\Image|static | resource
      */
     private function outputBuffer($filename = null, $output = false)
     {
@@ -960,8 +990,7 @@ class Image
     /**
      * Destroys the current resource.
      *
-     * @access public
-     * @return \GImage\Image
+     * @return \GImage\Image|static
      */
     public function destroy()
     {
@@ -977,7 +1006,6 @@ class Image
     /**
      * Add opacity filter to the current resource.
      *
-     * @access protected
      * @return void
      */
     protected function addOpacityFilter()
