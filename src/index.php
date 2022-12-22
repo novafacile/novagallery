@@ -9,5 +9,3 @@
  **/
 
 require_once('nova-base/init.php');
-
-

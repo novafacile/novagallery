@@ -20,5 +20,3 @@ Page::addData('album', '');
 Page::addData('gallery', $gallery);
 
 Template::render('home');
-
-?>

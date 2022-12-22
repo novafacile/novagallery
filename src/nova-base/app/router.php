@@ -40,8 +40,3 @@ Router::pathNotFound(function(){
 
 // Run
 Router::run(BASE_PATH);
-
-
-
-
-?>

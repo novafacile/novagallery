@@ -7,5 +7,3 @@ if(Site::config('pagePassword')){
     header('Location: '.Site::url().'/login');
   }
 }
-
-?>
