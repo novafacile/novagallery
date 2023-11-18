@@ -2,7 +2,7 @@
 /*
 * This file is part of GImage.
 *
-* (c) Jose Quintana <https://git.io/joseluisq>
+* (c) Jose Quintana <https://joseluisq.net>
 *
 * This source file is subject to the MIT license that is bundled
 * with this source code in the file LICENSE.
@@ -13,8 +13,7 @@ namespace GImage;
 /**
  * A Canvas represents a rectangular image area on which one can append images, text and figures.
  *
- * @package GImage
- * @author Jose Quintana <https://git.io/joseluisq>
+ * @author Jose Quintana <https://joseluisq.net>
  *
  * @property array $elementList An array of elements (Image, Figure or Text classes).
  */
@@ -30,8 +29,7 @@ class Canvas extends Image
     /**
      * Constructs a new Canvas.
      *
-     * @param mixed $element Only Image or Figure classes.
-     * @access public
+     * @param mixed $element only Image or Figure classes
      */
     public function __construct($element = null)
     {
@@ -41,8 +39,8 @@ class Canvas extends Image
     /**
      * Adds one or more elements to canvas.
      *
-     * @param mixed $elements Single or array of Image, Figure, Text classes.
-     * @access public
+     * @param mixed $elements single or array of Image, Figure, Text classes
+     *
      * @return \GImage\Canvas|static
      */
     public function append($elements)
@@ -63,8 +61,8 @@ class Canvas extends Image
     /**
      * Draws the canvas.
      *
-     * @access public
      * @return \GImage\Canvas|static
+     *
      * @throws \Exception
      */
     public function draw()
@@ -84,10 +82,7 @@ class Canvas extends Image
 
             $this->resource = $canvas;
         } else {
-            throw new \Exception(''
-                . 'Image or Figure class is not assigned. '
-                . 'E.g. "new Canvas($image_or_figure)"'
-                . '');
+            throw new \Exception('' . 'Image or Figure class is not assigned. ' . 'E.g. "new Canvas($image_or_figure)"' . '');
         }
 
         return $this;
@@ -96,8 +91,9 @@ class Canvas extends Image
     /**
      * Draw the an Image or Figure element.
      *
-     * @param  \GImage\Image|\GImage\Figure $element Image or Figure element.
-     * @param mixed                         $canvas
+     * @param \GImage\Image|\GImage\Figure $element image or Figure element
+     * @param mixed                        $canvas
+     *
      * @return void
      */
     private function drawImage($element, $canvas)
@@ -121,34 +117,36 @@ class Canvas extends Image
     /**
      * Draw a Text element.
      *
-     * @param  \GImage\Text $text Text element.
-     * @param mixed         $canvas
+     * @param \GImage\Text $text   text element
+     * @param mixed        $canvas
+     *
      * @return void
      */
     private function drawText(Text $text, $canvas)
     {
         list($red, $green, $blue) = $text->getColor();
-        $opacity = Utils::fixPNGOpacity($text->getOpacity());
+        $opacity                  = Utils::fixPNGOpacity($text->getOpacity());
 
         $color = imagecolorallocatealpha(
             $canvas,
             $red,
             $green,
             $blue,
-            $opacity < 127 ? $opacity : null
+            $opacity < 127 ? $opacity : 0
         );
 
-        $size = $text->getSize();
-        $angle = $text->getAngle();
-        $font = $text->getFontface();
+        $size       = $text->getSize();
+        $angle      = $text->getAngle();
+        $font       = $text->getFontface();
         $lineHeight = $text->getLineHeight() * $text->getSize();
 
         list($x, $y) = $text->getCords();
+        $x           = (int) floor($x);
 
         $lines = $text->wrappText();
 
         foreach ($lines as $i => $line) {
-            $ny = $y + ($lineHeight * $i);
+            $ny = (int) floor($y + ($lineHeight * $i));
             imagealphablending($canvas, true);
             imagettftext($canvas, $size, $angle, $x, $ny, $color, $font, $line);
         }
