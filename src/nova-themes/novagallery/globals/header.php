@@ -12,7 +12,10 @@
   <link rel="stylesheet" type="text/css" href="<?php echo THEME_PATH; ?>/assets/style.css" />
 
   <link rel="icon" href="<?php echo THEME_PATH; ?>/assets/novagallery-favicon.png" type="image/png">
-
+  <style>
+    .sl-download > a { font-size: 1.5rem; }
+    .sl-download > a:hover { text-decoration: none; }
+  </style>
 </head>
 <body>
   <div class="container">
