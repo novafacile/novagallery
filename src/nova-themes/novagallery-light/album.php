@@ -9,6 +9,9 @@
         <div class="col-12 mb-4"><a href="<?php echo Site::url().'/'.Page::data('parentPage'); ?>" class="text-muted link-back">&laquo; <?php L::p('Back'); ?></a></div>
       <?php endif; ?>
       <div class="container">
+        <?php if(!empty(Page::data('description'))): ?>
+          <?php echo Page::data('description');?>
+        <?php endif; ?>
         <!-- albums -->
         <?php if($gallery->hasAlbums()): ?>
         <div class="row px-2 mt-4">
