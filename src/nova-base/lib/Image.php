@@ -25,7 +25,7 @@ class Image {
     self::$filePath = IMAGES_DIR.'/'.$album;
     self::$original = self::$filePath.'/'.$image;
     self::$cache = $cache;
-    self::$cacheDirRoot = self::$filePath.'/cache';
+    self::$cacheDirRoot = CACHE_DIR.'/cache';
     self::$cacheDir = self::$cacheDirRoot.'/'.$size;
     self::$cacheFile = self::$cacheDir.'/'.$image;
 
@@ -80,7 +80,7 @@ class Image {
       }
     }
 
-    $url = IMAGES_URL.'/'.$album.'/cache/';
+    $url = CACHE_URL.'/'.$album.'/cache/';
 
     if($size){
       $url .= $size.'/';

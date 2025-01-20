@@ -8,7 +8,7 @@ Router::add('/', function() {
 
 
 // Gallery
-Router::add('/galleries/(.*)/cache/(.*)/(.*)', function($var1, $var2, $var3) {
+Router::add('/cache/(.*)/cache/(.*)/(.*)', function($var1, $var2, $var3) {
   require 'auth.php';
   $album = rawurldecode($var1);
   $size = rawurldecode($var2);

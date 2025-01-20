@@ -37,11 +37,17 @@ $imagesDirName = Site::config('imagesDirName');
 if(is_null($imagesDirName)){
   $imagesDirName = 'galleries';
 }
+$cacheDirName = Site::config('cacheDirName');
+if(is_null($cacheDirName)){
+  $cacheDirName = 'cache';
+}
 
 define('BASE_PATH', Site::basePath());
 
 define('IMAGES_DIR', ROOT_DIR.'/'.$imagesDirName);
+define('CACHE_DIR', ROOT_DIR.'/'.$cacheDirName);
 define('IMAGES_URL', BASE_PATH.'/'.$imagesDirName);
+define('CACHE_URL', BASE_PATH.'/'.$cacheDirName);
 define('IMAGES_QUALITY', Site::config('imageQuality'));
 
 define('THEME_DIR', 'nova-themes/'.Site::theme());

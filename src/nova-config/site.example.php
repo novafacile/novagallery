@@ -13,6 +13,7 @@
       2000
   ],
   "imagesDirName": "galleries",
+  "cacheDirName": "cache",
   "imageCache": 1,
   "imageSizeBig": 2000,
   "imageSizeThumb": "400x400",
