@@ -1,1 +1,3 @@
-/src/nova-config/site.php
+/src/config/site.php
+/src/config/addons.php
+#/src/.htaccess

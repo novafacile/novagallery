@@ -2,9 +2,12 @@ RewriteEngine on
 RewriteBase /
 
 # Deny direct access to the next directories
-RewriteRule ^nova-config/.*$ - [R=404,L]
-RewriteRule ^nova-base/.*$ - [R=404,L]
-RewriteRule ^nova-languages/.*$ - [R=404,L]
+RewriteRule ^config/.*$ - [R=404,L]
+RewriteRule ^core/.*$ - [R=404,L]
+RewriteRule ^languages/.*$ - [R=404,L]
+
+# Disable Directory Listing
+Options all -Indexes
 
 # All URL process by index.php
 RewriteCond %{REQUEST_FILENAME} !-f
