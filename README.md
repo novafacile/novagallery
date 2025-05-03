@@ -17,7 +17,7 @@ novaGallery is a beautiful php image gallery with the focus on your images, trim
 * **Use your own upload method**: Simply upload the photos into the gallery folder (e.g. via FTP) and the photos are already online
 * **Thumbnails**: Automatic generation of thumbnails
 * **File compression**: Photos with high file size, are automatically compressed with very little loss.
-* **JPEG & PNG**: JPG and PNG images are supported.
+* **Supported Images**: JPEG, PNG, GIF, WebP are supported.
 * **Custom Themes**: With just a little knowledge of CSS and HTML, the look can be customized.
 * **Languages**: You can run the gallery in your langauage
 * **Addons**: Addons allow you to extend the features of novaGallery:
