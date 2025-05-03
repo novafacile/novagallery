@@ -170,7 +170,7 @@ class novaPage {
   }
 
   public function themeUrl(){
-    return $this->url().'/theme/'.$this->theme.'/';
+    return $this->url().'/themes/'.$this->theme.'/';
   }
 
   // Error Pages (404, 405...)
