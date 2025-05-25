@@ -180,21 +180,16 @@ class app extends novaPage {
 
   // get album uri
   public function albumUri ($album, $parent = null){
-    return rawurlencode($parent ? $parent.'/'.$album : $album);
+    return $this->pathencode($parent ? $parent.'/'.$album : $album);
   }
 
   // get image url, depends on size
   public function imageUrl($album, $image, $size = false) : string {
-    $album = rawurldecode($album);
 
-    // split album name if is in sub dir because slash should't be encoded with rawurlencode
-    if (strpos($album, '/')) {
-        $pathArray = array_map('rawurlencode', explode('/', $album));
-        $album = implode('/', $pathArray);
-    } else {
-        $album = rawurlencode($album);
-    }
-    
+    // double decode encode to prevent double encode, if cover image url is requested
+    $album = rawurldecode($album);
+    $album = $this->pathencode($album);
+
     // split image name if is in sub dir because contains sub dirs
     if(strpos($image, '/')){
       $pathArray = explode('/', $image);
@@ -254,6 +249,20 @@ class app extends novaPage {
         $isAnimated = false;
     }
     return $isAnimated;
+  }
+
+  // helper for rawurlencode except slash
+  public function pathencode(string $string) : string {
+    if (strpos($string, '/')) {
+      $string = implode('/', array_map('rawurlencode', explode('/', $string)));
+    } else {
+      $string = rawurlencode($string);
+    }
+    return $string;
+  }
+
+  public function pathdecode(string $string) : string {
+    return implode('/', array_map('rawurldecode', explode('/', $string)));
   }
 
   // shortcuts
