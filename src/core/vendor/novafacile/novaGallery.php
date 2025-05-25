@@ -13,6 +13,8 @@ namespace novafacile;
 class novaGallery {
   
   protected string $dir = '';
+  protected int|null $cacheTime = null;
+  protected int|null $cacheAge = null;
   protected array $images = [];
   protected array $albums = [];
   protected bool $onlyWithImages = true;
@@ -21,6 +23,7 @@ class novaGallery {
   protected string $cacheFile = 'filesCache.php';
   protected bool $useExif = true;
   protected bool $allowSubAlbums = true;
+  protected array $filesCache = [];
 
   // Todo: config via config array or object
   function __construct(string $dir, bool $onlyWithImages = true, bool|int $maxCacheAge = 60, bool $useExif = true, bool|string $cacheDir = false, string $cacheFile = 'filesCache.php'){
@@ -31,18 +34,21 @@ class novaGallery {
     $this->cacheFile = $cacheFile;
     $this->useExif = $useExif;
 
-    if(!$this->maxCacheAge || !$this->readCache($dir, $maxCacheAge)){
+    if($this->maxCacheAge){
+      $cacheResult = $this->readCache($cacheDir?$cacheDir:$dir);
+    }
+
+    if(!$cacheResult || $this->cacheAge > $this->maxCacheAge){
       $this->images = $this->getImages($dir);
       $this->albums = $this->getAlbums($dir);
       if($maxCacheAge) {
         $this->writeCache($cacheDir?$cacheDir:$dir);
       }
-    }  
+    }
 
     if($onlyWithImages){
       $this->albums = $this->removeEmptyAlbums($this->albums);
     }
-
   }
 
   protected function getAlbums(string $dir) : array {
@@ -225,7 +231,7 @@ class novaGallery {
     }
 
     if($desc){
-      return array_reverse($orderedList);
+      return array_reverse($orderedList, true);
     } else {
       return $orderedList;
     }
@@ -235,7 +241,7 @@ class novaGallery {
   protected function removeEmptyAlbums(array $albums) : array {
     foreach ($albums as $album => $modDate) {
       if(!$this->hasImages($album) && $this->allowSubAlbums){
-        $subAlbum = new novaGallery($this->dir.'/'.$album);
+        $subAlbum = new novaGallery($this->dir.'/'.$album, $this->onlyWithImages, $this->maxCacheAge, $this->useExif, $this->cacheDir.'/'.$album, $this->cacheFile);
         if(!$subAlbum->hasAlbums()){
           unset($albums[$album]);
         }
@@ -247,24 +253,30 @@ class novaGallery {
   }
 
   
-  protected function readCache(string $dir, bool|int $maxAge) : bool {
+  protected function readCache(string $dir) : bool {
     $cacheFile = $dir.'/'.$this->cacheFile;
-    if(file_exists($cacheFile)){
-      $age = time() - filemtime($cacheFile);
-      if($age > $maxAge) {
-        return false;
-      }
 
-      $content = file($cacheFile);
-      unset($content[0]); // Remove first security line (<?php die();)
-      $content = implode($content); // Regenerate JSON
-      $content = json_decode($content, true);
-      $this->images = $content['images'];
-      $this->albums = $content['albums'];
-      return true;
-    } else {
+    if(!file_exists($cacheFile)){
       return false;
     }
+
+    // read cache content
+    $content = file($cacheFile);
+    unset($content[0]); // Remove first security line (<?php die();)
+    $content = implode($content); // Regenerate JSON
+    $content = json_decode($content, true); // JSON to array
+
+    // check if keys exists for compatibility with older versions
+    if(!array_key_exists('cacheTime', $content) || !array_key_exists('albums', $content) || !array_key_exists('images', $content)){
+      return false;
+    }
+
+    // read cache
+    $this->cacheTime = $content['cacheTime'];
+    $this->images = $content['images'];
+    $this->albums = $content['albums'];
+    $this->cacheAge = time() - $this->cacheTime;
+    return true;
   }
 
   protected function writeCache(string $dir) : bool {
@@ -272,7 +284,11 @@ class novaGallery {
       mkdir($dir, 0775, true);
     }
     $cacheFile = $dir.'/'.$this->cacheFile;
-    $content = ['images' => $this->images, 'albums' => $this->albums];
+    $content = [
+      'cacheTime' => time(),
+      'images' => $this->images,
+      'albums' => $this->albums
+    ];
     $content = json_encode($content, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK );
     $data = '<?php die(); ?>'.PHP_EOL;
     $data .= $content;
