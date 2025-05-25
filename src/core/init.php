@@ -17,7 +17,6 @@ spl_autoload_register(function($class){
     }
 });
 
-
 // load configs
 require 'app'.DS.'Config.php';
 $config = new Config(ROOT_DIR.DS.'config'.DS.'site.php', 'app');
