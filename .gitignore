@@ -1,3 +1,5 @@
+/src/galleries/*
+/src/storage/*
 /src/config/site.php
 /src/config/addons.php
 #/src/.htaccess
