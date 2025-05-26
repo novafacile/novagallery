@@ -166,12 +166,13 @@ class novaGallery {
   protected function shuffle_assoc(array $array) : array {
         $keys = array_keys($array);
         shuffle($keys);
+        $shuffled = [];
 
         foreach($keys as $key) {
-            $new[$key] = $array[$key];
+            $shuffled[$key] = $array[$key];
         }
 
-        return $new;
+        return $shuffled;
   }
 
   protected function order(array $list, string $order) : array {
