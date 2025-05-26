@@ -1,0 +1,80 @@
+/** 
+ * Theme for novaGallery - https://novagallery.org
+ * Theme: "novaGallery"
+ * Author: novafacile OÜ
+ * License: AGPL-3.0 
+ **/
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333;
+  --link-color: #333;
+  --link-color-hover: rgba(0, 0, 0, 0.9);
+  --link-color-muted: #6c757d;
+  --link-color-muted-hover: #6c757d;
+  --lightbox-bg: #ffffff;
+  --lightbox-color: #333;
+}
+
+
+body {
+  background-color: var(--bg-color);
+  padding: 0;
+  margin: 0;
+  color: var(--text-color);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 0.3rem;
+}
+
+a, a:visited {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  color: var(--link-color-hover);
+}
+
+.text-muted a, .text-muted a:visited {
+  color: var(--link-color-muted);
+  text-decoration: none;
+}
+
+.text-muted a:hover, .text-muted a:active{
+  color: var(--link-color-muted-hover); 
+}
+
+main .cover-image img {
+  width: 100%;
+  object-fit: cover;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  main .cover-image {
+    transition: transform .4s;
+  }
+
+  main .cover-image:hover {
+    transform: scale(1.02);
+  }  
+}
+
+/** Lightbox **/
+.sl-overlay {
+  background: var(--lightbox-bg);
+}
+
+.sl-wrapper .sl-image .sl-caption {
+  font-size: 1rem;
+  opacity: 0.9 !important;
+}
+
+.sl-wrapper .sl-close,
+.sl-wrapper .sl-navigation button,
+.sl-wrapper .sl-counter { 
+  color: var(--lightbox-color);
+  opacity: 1;
+  }

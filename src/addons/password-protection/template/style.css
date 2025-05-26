@@ -1,0 +1,26 @@
+.password-protection-login {
+  width: 100%;
+  max-width: 800px;
+  margin: 15vh auto 10vh auto;
+  padding: 3 2rem;
+  text-align: center;
+}
+
+.password-protection-login form {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.password-protection-login form > * {
+  margin-top: 1rem;
+  padding: 0.5rem;
+}
+
+.password-protection-login form input {
+  max-width: 400px;
+  width: 100%;
+}
+.password-protection-login form button {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
