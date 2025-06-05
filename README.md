@@ -28,8 +28,8 @@ novaGallery is a beautiful php image gallery with the focus on your images, trim
 
 ### Screenshots
 
-![novaGallery Home](https://novagallery.org/img/novagallery-home-400.jpg "novaGallery Home") ![novaGallery Album](https://novagallery.org/img/novagallery-album-400.jpg "novaGallery Album")
-![novaGallery Lightbox](https://novagallery.org/img/novagallery-lightbox-400.jpg "novaGallery Lightbox")
+![novaGallery Home](https://novagallery.org/img/novagallery-v2-home-400.jpg "novaGallery Home") ![novaGallery Album](https://novagallery.org/img/novagallery-v2-album-400.jpg "novaGallery Album")
+![novaGallery Lightbox](https://novagallery.org/img/novagallery-v2-lightbox-400.jpg "novaGallery Lightbox") ![novaGallery Password Addon](https://novagallery.org/img/novagallery-v2-password-400.jpg "novaGallery Password Addon")
 
 ### Demo
 
