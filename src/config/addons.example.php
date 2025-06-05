@@ -11,5 +11,5 @@
   "novaGallery Pro": {
     "enabled": false,
     "licenseKey": ""
-  },
+  }
 }
