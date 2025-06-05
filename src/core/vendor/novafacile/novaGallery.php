@@ -147,7 +147,7 @@ class novaGallery {
     return $date;
   }
 
-  protected function timestampFromExif(string $string) : int {
+  protected function timestampFromExif(string $string) : mixed {
     if (!(preg_match('/\d\d\d\d:\d\d:\d\d \d\d:\d\d:\d\d/', $string))) {
       return $string; // wrong date
     }
