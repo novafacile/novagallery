@@ -4,12 +4,12 @@
  * @author novafacile OÜ
  * @copyright Copyright (c) 2025 by novafacile OÜ
  * @license AGPL-3.0
- * @version 2.0.2
+ * @version 2.0.3
  * @link https://novagallery.org
  **/
 
 // define basics
-define('VERSION', '2.0.2');
+define('VERSION', '2.0.3');
 define('NOVA', true);
 define('ROOT_DIR', __DIR__);
 define('DS', DIRECTORY_SEPARATOR);
