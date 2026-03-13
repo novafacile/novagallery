@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Image Gallery - List Images and Albums
  * @author novafacile OÜ
  * @copyright Copyright (c) 2025 by novafacile OÜ
  * @license AGPL-3.0
- * @version 2.0.0
+ * @version 2.1.0
  * @link https://novagallery.org
  * to disable cache just set maxCacheAge to 'false' on initialization
  **/
@@ -97,7 +97,7 @@ class novaGallery {
     return $fileList;
   }
 
-  protected function getImageCaptureDate(string $file) : int{
+  protected function getImageCaptureDate(string $file) : mixed {
     if(!file_exists($file)) { return false;  }
 
     if(!$this->useExif){
@@ -110,11 +110,11 @@ class novaGallery {
 
     // Get the photo's EXIF tags
     try {
-      @$exif_data = exif_read_data($file);
+      $exif_data = exif_read_data($file);
       if($exif_data === false) {
         return filemtime($file); // use filemtime, if no exif data
       }
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       return filemtime($file); // use filemtime, if exif data error
     }
     
@@ -123,10 +123,10 @@ class novaGallery {
     $date = false;
     // Array of EXIF date tags to check
     $date_tags = [
-      'DateTimeOriginal',
-      'DateTimeDigitized',
-      'DateTime',
-      //'FileDateTime'
+      'DateTimeOriginal',   // 1st choice: original capture date
+      'DateTimeDigitized',  // 2nd choice: digitization date
+      'CreateDate',         // 3rd choice: XMP creation date
+      'DateTime'           // 4th choice: may have been overwritten
     ];
 
     // Check for the EXIF date tags, in the order specified above. First value wins.
@@ -139,10 +139,13 @@ class novaGallery {
     }
 
     // If no date tags were found use filemtime
-    if(!$date) { return filemtime($file);}
+    if($date === false) { return filemtime($file);}
 
     //If the date that was extracted is a string, convert it to an integer
-    if( is_string($date) ) $date = strtotime($date);
+    if(is_string($date)) $date = strtotime($date);
+
+    // If strtotime failed, fall back to filemtime  
+    if($date === false) { return filemtime($file); }
 
     return $date;
   }
@@ -152,13 +155,8 @@ class novaGallery {
       return $string; // wrong date
     }
 
-    $iTimestamp = mktime(
-            substr( $string, 11, 2 ), 
-            substr( $string, 14, 2 ), 
-            substr( $string, 17, 2 ), 
-            substr( $string, 5, 2 ), 
-            substr( $string, 8, 2 ), 
-            substr( $string, 0, 4 ));
+    // Convert EXIF date format (YYYY:MM:DD HH:MM:SS) to Unix timestamp
+    $iTimestamp = strtotime(str_replace(':', '-', substr($string, 0, 10)) . substr($string, 10));
     return $iTimestamp;
   }
 
@@ -217,7 +215,7 @@ class novaGallery {
     $aSearch   = array("Ä","ä","Ö","ö","Ü","ü","ß","-");
     $aReplace  = array("A","a","O","o","U","u","ss"," ");
     foreach($aOriginal as $key => $val) {
-      $aModified[$key] = str_replace($aSearch, $aReplace, $val);
+      $aModified[$key] = str_replace($aSearch, $aReplace, (string) $val);
     }
     natcasesort($aModified);
     foreach($aModified as $key => $val) {
@@ -335,7 +333,8 @@ class novaGallery {
 
 
 
-  public function coverImage(string $album, string $order = 'default') : string {
+  public function coverImage(string|int $album, string $order = 'default') : string {
+    $album = (string) $album;
     if($this->hasImages($album)){
       $images = $this->order($this->albums["$album"], $order);  
       reset($images);
@@ -368,9 +367,9 @@ class novaGallery {
     }
   }
 
-  public function hasImages(bool|string $album = false) : bool {
+  public function hasImages(bool|string|int $album = false) : bool {
     // choose correct image array
-    if($album){
+    if($album !== false){
       $imageList = &$this->albums[$album];
     } else {
       $imageList = &$this->images;
@@ -385,7 +384,7 @@ class novaGallery {
   }
   
   public function parentAlbum(string $album) : string {
-    $parent = strrpos($album, '/');
+    $parent = strrpos($album, '/') ?: 0;
     return substr($album, 0, $parent);
   }
 
