@@ -160,8 +160,8 @@ novaGallery is a beautiful php image gallery with the focus on your images, trim
 | `imageQuality`             | JPEG quality for generated images (1–100)                               | `85`                                                        |
 | `useOriginalForLarge`      | Use original image for large version instead of a resized one (`true`, `false`)   | `false`                                                     |
 | `useExifDate`              | Use EXIF date for sorting (`true`, `false`)                                   | `true`                                                      |
-| `sortAlbums`               | Sort order of albums (`nameASC`, `dateDESC`, `nameASC`, `nameDESC`, `random`)                      | `dateDESC`                                                  |
-| `sortImages`               | Sort order of images within an album (`nameASC`, `dateDESC`, `nameASC`, `nameDESC`, `random`)      | `dateDESC`                                                  |
+| `sortAlbums`               | Sort order of albums (`dateASC`, `dateDESC`, `nameASC`, `nameDESC`, `random`)                      | `dateDESC`                                                  |
+| `sortImages`               | Sort order of images within an album (`dateASC`, `dateDESC`, `nameASC`, `nameDESC`, `random`)      | `dateDESC`                                                  |
 | `albumTitle.enabled`       | Enables or disables transformation of album titles (`true`, `false`)                      | `true`                                                      |
 | `albumTitle.transformation`| Transformation applied to album titles (`ucwords`, `ucfirst`, `uppercase`, `lowercase`)   | `ucwords`                                                   |
 | `albumTitle.replace`       | Characters to be replaced in album titles                               | `{ "_": " ", "-": " ", "/": " » " }`                        |
