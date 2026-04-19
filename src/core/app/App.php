@@ -57,6 +57,12 @@ class app extends novaPage {
     $this->album = $this->removeBadSigns(rawurldecode($album));
     $size = $this->removeBadSigns(rawurldecode($size));
     $image = $this->removeBadSigns(rawurldecode($image));
+
+    if(!$this->isSafeRelativePath($this->album) || !$this->isSafeRelativePath($image) || !$this->isPathWithinImagesDir($this->album, $image)){
+      $this->imageNotFound();
+      exit;
+    }
+
     $noenlarge = true;
     if($size == 'thumbnail') {
       $noenlarge = false;
@@ -86,6 +92,11 @@ class app extends novaPage {
 
     // small protection for album names
     $this->album = $this->removeBadSigns($album);
+
+    if(!$this->isSafeRelativePath($this->album) || !$this->isPathWithinImagesDir($this->album)){
+      $this->errorPage('404');
+      return;
+    }
 
     // load album
     $this->addons->dispatch('beforePage');
@@ -236,6 +247,52 @@ class app extends novaPage {
     $value = str_replace('<', '&lt;', $value);
     $value = str_replace('>', '&gt;', $value);
     return $value;
+  }
+
+  protected function isSafeRelativePath(string $value) : bool {
+    if($value === ''){
+      return true;
+    }
+    if(strpos($value, "\0") !== false){
+      return false;
+    }
+    if(strpos($value, '..') !== false){
+      return false;
+    }
+    if(strpos($value, '\\') !== false){
+      return false;
+    }
+    if(preg_match('/^(?:[A-Za-z]:)?\//', $value)){
+      return false;
+    }
+    return true;
+  }
+
+  protected function isPathWithinImagesDir(string $album, string $image = '') : bool {
+    $base = realpath(IMAGES_DIR);
+    if($base === false){
+      return false;
+    }
+
+    $target = IMAGES_DIR;
+    if($album !== ''){
+      $target .= DS.$album;
+    }
+    if($image !== ''){
+      $target .= DS.$image;
+    }
+
+    $resolved = realpath($target);
+    if($resolved === false){
+      return false;
+    }
+
+    return strncmp($resolved, $base.DS, strlen($base.DS)) === 0 || $resolved === $base;
+  }
+
+  protected function imageNotFound() : void {
+    header('HTTP/1.0 404 Not Found');
+    echo 'error 404 - image not found';
   }
 
   // helper to check if image is an animated webp

@@ -41,6 +41,12 @@ class novaImage {
 
     $original = IMAGES_DIR.DS.$albumPath.$image;
 
+    $imagesRoot = realpath(IMAGES_DIR);
+    $originalResolved = realpath($original);
+    if($imagesRoot === false || $originalResolved === false || (strncmp($originalResolved, $imagesRoot.DS, strlen($imagesRoot.DS)) !== 0 && $originalResolved !== $imagesRoot)){
+      $this->imageNotFound();
+    }
+
     if(!file_exists($original)){
       $this->imageNotFound();
     }
