@@ -34,6 +34,7 @@ class novaGallery {
     $this->cacheFile = $cacheFile;
     $this->useExif = $useExif;
 
+    $cacheResult = false;
     if($this->maxCacheAge){
       $cacheResult = $this->readCache($cacheDir?$cacheDir:$dir);
     }
