@@ -2,9 +2,9 @@
 /**
  * Initalize novaGallery App
  * @author novafacile OÜ
- * @copyright Copyright (c) 2025 by novafacile OÜ
+ * @copyright Copyright (c) 2021 - 2026 by novafacile OÜ
  * @license AGPL-3.0
- * @version 2.0.0
+ * @version 2.1.2
  * @link https://novagallery.org
  **/
 namespace novafacile;

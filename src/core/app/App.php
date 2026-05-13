@@ -2,9 +2,9 @@
 /**
  * novaGallery Web App
  * @author novafacile OÜ
- * @copyright Copyright (c) 2025 by novafacile OÜ
+ * @copyright Copyright (c) 2021 - 2026 by novafacile OÜ
  * @license AGPL-3.0
- * @version 2.0.0
+ * @version 2.1.1
  * @link https://novagallery.org
  */
 namespace novafacile;
@@ -29,7 +29,7 @@ class app extends novaPage {
   public function footerText(){
     global $config;
     $config->set('footerTextOriginal',$config->get('footerText'));
-    $branding = '<br>Powered by <a href="http://novagallery.org" target="_blank">novaGallery</a><br><br>';
+    $branding = '<br>Powered by <a href="https://novagallery.org" target="_blank">novaGallery</a><br><br>';
     if($config->get('footerText')){
       $config->set('footerTextOriginal', $config->get('footerText'));
       $config->set('footerText', $config->get('footerText').$branding);

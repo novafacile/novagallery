@@ -2,9 +2,9 @@
 /**
  * Image Gallery - List Images and Albums
  * @author novafacile OÜ
- * @copyright Copyright (c) 2025 by novafacile OÜ
+ * @copyright Copyright (c) 2021 - 2026 by novafacile OÜ
  * @license AGPL-3.0
- * @version 2.1.0
+ * @version 2.1.2
  * @link https://novagallery.org
  * to disable cache just set maxCacheAge to 'false' on initialization
  **/

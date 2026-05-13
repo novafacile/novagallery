@@ -2,14 +2,14 @@
 /**
  * novaGallery
  * @author novafacile OÜ
- * @copyright Copyright (c) 2025 by novafacile OÜ
+ * @copyright Copyright (c) 2021 - 2026 by novafacile OÜ
  * @license AGPL-3.0
- * @version 2.0.3
+ * @version 2.1.2
  * @link https://novagallery.org
  **/
 
 // define basics
-define('VERSION', '2.0.3');
+define('VERSION', '2.1.2');
 define('NOVA', true);
 define('ROOT_DIR', __DIR__);
 define('DS', DIRECTORY_SEPARATOR);
