@@ -4,7 +4,7 @@
  * @author novafacile OÜ
  * @copyright Copyright (c) 2025 by novafacile OÜ
  * @license AGPL-3.0
- * @version 2.0.0
+ * @version 2.0.1
  * @link https://novagallery.org
  */
 namespace novafacile;
@@ -70,7 +70,7 @@ class Config extends novaConfig {
           '_' => ' '
         ],
         'showInAlbum' => false,
-        'showInLightBox' => false
+        'showInLightbox' => false
       ],
     ];
     return $default;
